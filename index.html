@@ -27,12 +27,13 @@
       --teal:        #00C4B3;
       --teal-pale:   #E0F8F5;
       --gray:        #646569;
-      --text:        #2D2D2D;
+      --text:        #3D3D3D;
       --bg-light:    #FAFAFA;
     }
 
     body {
-      font-family: 'Noto Sans TC', 'Noto Sans TC', sans-serif;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 17px;
       color: var(--text);
       overflow-x: hidden;
       margin: 0;
@@ -507,7 +508,7 @@
     }
 
     .hero-desc {
-      font-size: 1.08rem;
+      font-size: 1.12rem;
       color: var(--gray);
       font-weight: 400;
       line-height: 1.85;
@@ -528,7 +529,7 @@
       background: #fff;
       border: 1.5px solid #f0e6d6;
       color: var(--text);
-      font-size: 0.86rem;
+      font-size: 0.95rem;
       font-weight: 600;
       padding: 9px 18px;
       border-radius: 50px;
@@ -656,14 +657,14 @@
     }
     .hero-trust-num {
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 1.95rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: var(--orange);
       line-height: 1;
       letter-spacing: -1px;
     }
     .hero-trust-lbl {
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       color: var(--gray);
       margin-top: 6px;
       font-weight: 500;
@@ -673,6 +674,63 @@
        共用 Section
     ══════════════════════════════════════ */
     .sec { padding: 120px 0; position: relative; overflow: hidden; }
+
+    /* ══════════════════════════════════════
+       強反差過場：微弱漸層融合帶
+       在進入色塊大反差的 sec 上方做 40px 柔化
+    ══════════════════════════════════════ */
+    .sec-trust::before,
+    .sec-skills::before,
+    .sec-vs-surface::before,
+    .sec-flow::before,
+    .sec-video::before,
+    .sec-syllabus::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 40px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* sec-faq 結尾 → footer-cta 橘色（用 ::after 因為 footer-cta 已佔 ::before/::after） */
+    .sec-faq::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(180deg, transparent, #ff8a00);
+      opacity: 0.85;
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* sec-overview 米白 → sec-trust 橘 */
+    .sec-trust::before {
+      background: linear-gradient(180deg, #FFFAF2, transparent);
+    }
+    /* sec-trust 橘 → sec-skills 淡灰 */
+    .sec-skills::before {
+      background: linear-gradient(180deg, #ff8a00, transparent);
+      opacity: 0.85;
+    }
+    /* sec-skills 淡灰 → sec-vs-surface 深 */
+    .sec-vs-surface::before {
+      background: linear-gradient(180deg, #FAFAFA, transparent);
+    }
+    /* sec-vs-surface 深 → sec-flow 白（從深色淡入白） */
+    .sec-flow::before {
+      background: linear-gradient(180deg, rgba(26,15,0,0.85), transparent);
+    }
+    /* sec-curriculum 結尾白 → sec-video 深 */
+    .sec-video::before {
+      background: linear-gradient(180deg, #fff, transparent);
+    }
+    /* sec-video 深 → sec-syllabus 白 */
+    .sec-syllabus::before {
+      background: linear-gradient(180deg, rgba(26,15,0,0.85), transparent);
+    }
+    /* 保證 container 內容在融合帶上方 */
+    .sec > .container { position: relative; z-index: 2; }
+
     .sec-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -715,7 +773,7 @@
     .sec-heading .accent-r { color: var(--red); }
     .sec-heading .accent-t { color: var(--teal); }
     .sec-desc {
-      font-size: 1rem;
+      font-size: 1.06rem;
       color: var(--gray);
       line-height: 1.85;
       max-width: 720px;
@@ -778,7 +836,7 @@
     .r3 .reason-num { color: var(--teal); }
 
     .reason-title {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: var(--text);
       margin-bottom: 14px;
@@ -786,7 +844,7 @@
       line-height: 1.4;
     }
     .reason-text {
-      font-size: 0.96rem;
+      font-size: 1.05rem;
       color: var(--gray);
       line-height: 1.85;
       margin-bottom: 0;
@@ -807,7 +865,7 @@
     /* ══════════════════════════════════════
        Section 2：課程定位
     ══════════════════════════════════════ */
-    .sec-overview { background: #fff; }
+    .sec-overview { background: #FFFAF2; }
 
     .quote-card {
       background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8ef 100%);
@@ -830,7 +888,7 @@
       font-weight: 700;
     }
     .quote-card p {
-      font-size: 1.18rem;
+      font-size: 1.25rem;
       color: var(--text);
       line-height: 1.95;
       margin: 0;
@@ -870,7 +928,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text);
     }
@@ -885,7 +943,7 @@
       flex-shrink: 0;
     }
     .info-value {
-      font-size: 0.96rem;
+      font-size: 1.05rem;
       color: var(--text);
       line-height: 1.7;
       padding-top: 10px;
@@ -970,7 +1028,7 @@
     }
     .trust-num .small { font-size: 1.6rem; }
     .trust-lbl {
-      font-size: 1rem;
+      font-size: 1.08rem;
       color: var(--text);
       font-weight: 700;
       margin-bottom: 8px;
@@ -978,7 +1036,7 @@
       z-index: 1;
     }
     .trust-sub {
-      font-size: 0.84rem;
+      font-size: 0.92rem;
       color: var(--gray);
       font-weight: 400;
       position: relative;
@@ -1166,14 +1224,14 @@
       margin-bottom: 8px;
     }
     .skill-title {
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       font-weight: 900;
       color: var(--text);
       margin-bottom: 16px;
       letter-spacing: -0.5px;
     }
     .skill-desc {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: var(--gray);
       line-height: 1.85;
       margin-bottom: 18px;
@@ -1184,7 +1242,7 @@
       gap: 6px;
     }
     .skill-tag {
-      font-size: 0.74rem;
+      font-size: 0.88rem;
       color: var(--gray);
       background: #f5f5f5;
       padding: 5px 12px;
@@ -1197,9 +1255,14 @@
        Section 4.5：表面 vs 實際對照
     ══════════════════════════════════════ */
     .sec-vs-surface {
-      background: linear-gradient(180deg, var(--bg-light) 0%, #fff 100%);
+      background: #1a0f00;
+      color: #fff;
       position: relative;
+      overflow: hidden;
     }
+    .sec-vs-surface .sec-heading { color: #fff; }
+    .sec-vs-surface .sec-desc { color: rgba(255,255,255,0.72); }
+    .sec-vs-surface .sec-desc strong { color: #fff; }
     .vs-table {
       max-width: 1080px;
       margin: 56px auto 0;
@@ -1217,32 +1280,35 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 0.97rem;
+      font-size: 1.05rem;
       border-radius: 18px;
       transition: all 0.3s;
     }
     .vs-cell-surface {
-      background: #fff;
-      border: 1.5px solid #e8e8e8;
-      color: var(--gray);
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.55);
+      backdrop-filter: blur(6px);
     }
     .vs-row:hover .vs-cell-surface {
       transform: translateX(-4px);
+      background: rgba(255,255,255,0.1);
     }
     .vs-cell-real {
-      background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8ef 100%);
-      border: 1.5px solid rgba(255,163,0,0.3);
-      color: var(--text);
+      background: linear-gradient(135deg, var(--orange) 0%, #ff8a00 100%);
+      border: 1.5px solid rgba(255,163,0,0.4);
+      color: #fff;
       font-weight: 700;
       position: relative;
+      box-shadow: 0 8px 24px rgba(255,163,0,0.25);
     }
     .vs-row:hover .vs-cell-real {
       transform: translateX(4px);
-      box-shadow: 0 14px 32px rgba(255,163,0,0.16);
+      box-shadow: 0 18px 40px rgba(255,163,0,0.45);
     }
     .vs-cell-real::before {
       content: '★';
-      color: var(--orange);
+      color: #fff;
       font-size: 1rem;
       flex-shrink: 0;
     }
@@ -1257,8 +1323,8 @@
     .vs-icon {
       width: 36px; height: 36px;
       border-radius: 10px;
-      background: #f5f5f5;
-      color: var(--gray);
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1268,18 +1334,22 @@
     .vs-summary {
       max-width: 880px;
       margin: 56px auto 0;
-      padding: 32px 36px;
-      background: var(--text);
+      padding: 36px 40px;
+      background: linear-gradient(135deg, var(--orange) 0%, #ff8a00 100%);
       color: #fff;
       border-radius: 24px;
       text-align: center;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
       line-height: 1.85;
-      font-weight: 500;
+      font-weight: 600;
       position: relative;
+      box-shadow: 0 18px 48px rgba(255,163,0,0.32);
     }
     .vs-summary strong {
-      color: var(--orange);
+      color: #fff;
+      background: rgba(0,0,0,0.22);
+      padding: 2px 10px;
+      border-radius: 6px;
       font-weight: 800;
     }
 
@@ -1515,7 +1585,7 @@
        Section 6：四大實戰主題
     ══════════════════════════════════════ */
     .sec-curriculum {
-      background: linear-gradient(180deg, var(--bg-light) 0%, #fff 100%);
+      background: linear-gradient(180deg, #FFFAF2 0%, #fff 100%);
       position: relative;
     }
 
@@ -1585,7 +1655,7 @@
       line-height: 1.3;
     }
     .topic-desc {
-      font-size: 0.97rem;
+      font-size: 1.05rem;
       color: var(--gray);
       line-height: 1.85;
       margin-bottom: 24px;
@@ -1602,7 +1672,7 @@
       gap: 12px;
       padding: 11px 0;
       border-bottom: 1px dashed #f0e6d6;
-      font-size: 0.93rem;
+      font-size: 1rem;
       line-height: 1.65;
       color: var(--text);
     }
@@ -1637,7 +1707,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.82rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--orange-dark);
       background: var(--orange-pale);
@@ -1911,7 +1981,7 @@
 
     .unit-info { flex: 1; }
     .unit-info h4 {
-      font-size: 1.22rem;
+      font-size: 1.3rem;
       font-weight: 900;
       color: var(--text);
       margin: 0 0 6px 0;
@@ -1958,13 +2028,13 @@
       color: var(--orange);
     }
     .lesson-title {
-      font-size: 0.96rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--text);
     }
     .lesson-meta { display: flex; flex-wrap: wrap; gap: 6px; }
     .lesson-chip {
-      font-size: 0.74rem;
+      font-size: 0.85rem;
       padding: 4px 12px;
       border-radius: 50px;
       font-weight: 600;
@@ -1982,7 +2052,7 @@
        Section 8.5：AI 思維 vs AI 實作營對照
     ══════════════════════════════════════ */
     .sec-vs-camp {
-      background: linear-gradient(180deg, #fff 0%, var(--bg-light) 100%);
+      background: linear-gradient(180deg, #fff 0%, #F0FCFA 100%);
       position: relative;
     }
     .compare-table {
@@ -2005,7 +2075,12 @@
       color: #fff;
       font-weight: 700;
     }
-    .compare-row.head .compare-cell { color: #fff; padding: 22px 28px; font-size: 0.92rem; letter-spacing: 1px; }
+    .compare-row.head .compare-cell { color: #fff; padding: 22px 28px; font-size: 0.98rem; letter-spacing: 1px; }
+    .compare-row.head .compare-cell.item {
+      background: var(--text);
+      color: #fff;
+      border-right-color: rgba(255,255,255,0.1);
+    }
     .compare-row.head .compare-cell.right {
       background: var(--orange);
       position: relative;
@@ -2023,7 +2098,7 @@
     }
     .compare-cell {
       padding: 22px 28px;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       line-height: 1.65;
     }
     .compare-cell.item {
@@ -2085,7 +2160,7 @@
        Section 8.7：適合 / 不適合
     ══════════════════════════════════════ */
     .sec-suitable {
-      background: var(--bg-light);
+      background: #FFFAF2;
       position: relative;
     }
     .suitable-grid {
@@ -2152,7 +2227,7 @@
       align-items: flex-start;
       gap: 12px;
       padding: 12px 0;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       line-height: 1.7;
       color: var(--text);
       border-bottom: 1px dashed #f5f5f5;
@@ -2203,7 +2278,7 @@
       gap: 18px;
       padding: 24px 30px;
       cursor: pointer;
-      font-size: 1.04rem;
+      font-size: 1.12rem;
       font-weight: 700;
       color: var(--text);
     }
@@ -2245,7 +2320,7 @@
       overflow: hidden;
       transition: max-height 0.4s ease;
       color: var(--gray);
-      font-size: 0.96rem;
+      font-size: 1.05rem;
       line-height: 1.85;
     }
     .faq-item.open .faq-a { max-height: 400px; }
@@ -2446,11 +2521,136 @@
       .footer-bottom-inner { flex-direction: column; text-align: center; }
     }
 
-    /* RWD */
+    /* ══════════════════════════════════════
+       RWD 統一加固（D1 + D2 + D3）
+    ══════════════════════════════════════ */
+
+    /* 平板（≤ 991px） */
     @media (max-width: 991px) {
       .hero { padding: 100px 0 60px; min-height: auto; }
       .hero-visual { margin-top: 40px; }
-      .bubble { font-size: 1rem; padding: 8px 14px; }
+      .bubble { font-size: 0.95rem; padding: 8px 14px; }
+      /* Hero 主圖第二圈虛線隱藏 */
+      .hero-img-frame   { inset: -10px; }
+      .hero-img-frame-2 { display: none; }
+      /* 5 大能力 featured 浮起取消（避免在 2 欄時亂位） */
+      .skill-card.featured { transform: none; box-shadow: 0 14px 36px rgba(255,163,0,0.15); }
+      .skill-card.featured:hover { transform: translateY(-6px); }
+    }
+
+    /* 手機（≤ 768px）─ 主要 RWD 修補 */
+    @media (max-width: 768px) {
+      /* 全頁節奏 */
+      body { font-size: 16px; }
+      .sec { padding: 60px 0; }
+      .container { padding-left: 20px; padding-right: 20px; }
+
+      /* 字級全面收斂（手機更緊密） */
+      .hero-title { font-size: 2.2rem !important; line-height: 1.2; }
+      .hero-desc { font-size: 1rem; }
+      .sec-heading { font-size: 1.7rem !important; line-height: 1.3; }
+      .sec-desc { font-size: 0.98rem; }
+      .quote-card p { font-size: 1.05rem; line-height: 1.85; }
+      .quote-mark { font-size: 7rem; top: -8px; left: 16px; }
+      .skill-desc, .topic-desc, .info-value, .compare-cell,
+      .suitable-list li, .lesson-title, .faq-a, .reason-text,
+      .topic-list li { font-size: 0.96rem !important; }
+      .faq-q { font-size: 1.02rem; padding: 18px 22px; gap: 14px; }
+      .faq-q-icon { min-width: 38px; height: 32px; padding: 0 8px; font-size: 0.78rem; }
+      .faq-a-inner { padding: 4px 22px 22px 64px; }
+      .skill-title, .topic-title, .reason-title { font-size: 1.32rem !important; }
+      .skill-tag { font-size: 0.82rem; padding: 4px 10px; }
+      .topic-product { font-size: 0.86rem; padding: 5px 12px; }
+      .lesson-chip { font-size: 0.78rem; }
+      .hero-trust-num { font-size: 1.7rem; }
+      .hero-trust-lbl { font-size: 0.82rem; }
+      .trust-num { font-size: 2.8rem; }
+      .trust-lbl { font-size: 1rem; }
+      .compare-summary, .vs-summary { font-size: 1.02rem; padding: 26px 22px; }
+
+      /* 卡片 padding 收斂 */
+      .quote-card { padding: 36px 24px 28px; border-radius: 24px; }
+      .quote-mark { font-size: 7rem; }
+      .info-row { padding: 16px 18px; gap: 6px; }
+      .info-label { font-size: 0.92rem; }
+      .reason-block { padding: 26px 22px; gap: 14px; border-radius: 20px; }
+      .reason-block:hover { transform: none; }
+      .skill-card { padding: 32px 22px; border-radius: 22px; }
+      .topic-block { padding: 32px 22px; gap: 28px; border-radius: 24px; }
+      .topic-bignum { font-size: 4rem; top: -16px; right: 18px; }
+      .topic-block.reverse .topic-bignum { left: 18px; right: auto; }
+      .trust-card { padding: 28px 22px; border-radius: 22px; }
+      .highlight-card { padding: 22px 18px; }
+      .video-frame { aspect-ratio: 16/10; margin-top: 36px; }
+      .video-play { width: 64px; height: 64px; }
+      .video-label { font-size: 0.78rem; padding: 7px 14px; bottom: 16px; }
+      .footer-cta { padding: 80px 0; }
+
+      /* topic 圓圖縮小 + 副圖縮圖更小 */
+      .topic-photo { max-width: 280px; }
+      .topic-thumb { width: 80px; height: 80px; border-width: 4px; }
+      .topic-photo-frame { inset: 4px; border-width: 2px; }
+
+      /* 教學流程 phase 卡片 */
+      .phase-block { padding: 28px 22px; gap: 22px; }
+      .phase-circle { width: 56px; height: 56px; }
+      .phase-emoji { font-size: 1.4rem; }
+      .phase-step { min-width: 64px; }
+      .phase-step-label { font-size: 0.82rem; }
+      .phase-label h3 { font-size: 1.25rem; }
+
+      /* 對照表（vs 表面） */
+      .vs-row { grid-template-columns: 1fr; gap: 8px; }
+      .vs-arrow { transform: rotate(90deg); padding: 4px; }
+      .vs-cell { padding: 18px 22px; font-size: 1rem; border-radius: 14px; }
+      .vs-summary { font-size: 1.05rem; line-height: 1.85; padding: 28px 22px; border-radius: 20px; }
+
+      /* Compare table（vs 實作營） */
+      .compare-row { grid-template-columns: 1fr !important; }
+      .compare-cell { padding: 14px 18px !important; border-right: none !important; }
+      .compare-cell.item { background: #2a2a2a; color: #fff; font-weight: 700; }
+      .compare-row.head .compare-cell.right::before { display: none; }
+
+      /* Suitable */
+      .suitable-col { padding: 28px 22px; border-radius: 22px; }
+      .suitable-header h3 { font-size: 1.15rem; }
+
+      /* Unit syllabus */
+      .unit-header { padding: 18px 22px; gap: 14px; }
+      .unit-num { width: 44px; height: 44px; font-size: 1.05rem; }
+      .unit-info h4 { font-size: 1.1rem; }
+      .unit-info p { font-size: 0.8rem; }
+      .lesson-row { padding: 14px 22px; }
+
+      /* Footer */
+      .footer-cta h2 { font-size: 1.85rem; }
+      .footer-cta p { font-size: 0.96rem; }
+      .btn-footer { padding: 16px 36px; font-size: 0.95rem; }
+
+      /* 背景 deco 在手機隱藏一半（每段最多 1 個） */
+      .sec > svg.deco:nth-of-type(n+2) { display: none; }
+      /* Hero deco 也隱藏一半（保留 4 個關鍵裝飾） */
+      .hero > .geo:nth-of-type(n+5),
+      .hero > svg.deco:nth-of-type(n+5) { display: none; }
+    }
+
+    /* 小手機（≤ 575px）─ 進一步收斂 */
+    @media (max-width: 575px) {
+      .sec { padding: 50px 0; }
+      .hero { padding: 90px 0 40px; }
+      .container { padding-left: 16px; padding-right: 16px; }
+      .hero-title { font-size: 1.95rem !important; }
+      .sec-heading { font-size: 1.55rem !important; }
+      .hero-trust { flex-direction: column; gap: 16px; }
+      .hero-badges { gap: 6px; }
+      .hero-badge { font-size: 0.82rem; padding: 7px 14px; }
+      .btn-hero-primary, .btn-hero-ghost { padding: 14px 24px; font-size: 0.92rem; width: 100%; justify-content: center; }
+      .hero-cta { flex-direction: column; gap: 10px; align-items: stretch; }
+      .topic-photo { max-width: 240px; }
+      .topic-thumb { width: 64px; height: 64px; }
+      .vs-cell { font-size: 0.94rem; padding: 16px 18px; }
+      .footer-cta h2 { font-size: 1.55rem; }
+      .compare-summary, .vs-summary { font-size: 0.95rem; line-height: 1.8; }
     }
   </style>
 </head>
@@ -2647,11 +2847,6 @@
     </div>
 
     <!-- 波浪過場：Hero → 課程定位 -->
-    <div class="wave-divider" style="position:absolute;bottom:0;left:0;right:0;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" fill="#fff"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
@@ -2662,7 +2857,6 @@
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:80px;left:6%;" data-parallax="0.3" width="36" height="36" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
     <svg class="deco anim-3" style="top:40%;right:8%;" data-parallax="0.5" width="50" height="50" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.1"><circle cx="12" cy="12" r="10"/></svg>
-    <svg class="deco anim-wiggle" style="bottom:120px;left:8%;" data-parallax="0.4" width="80" height="14" viewBox="0 0 80 14" opacity="0.3"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 80 7" stroke="#FF5859" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container">
       <div class="text-center mb-3" data-aos="fade-up">
@@ -2708,13 +2902,6 @@
 
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#fff"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
@@ -2725,7 +2912,6 @@
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:80px;right:8%;" data-parallax="0.4" width="48" height="48" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
     <svg class="deco anim-3" style="bottom:120px;left:5%;" data-parallax="0.5" width="60" height="60" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.1"><circle cx="12" cy="12" r="10"/></svg>
-    <svg class="deco anim-wiggle" style="top:40%;left:8%;" data-parallax="0.3" width="80" height="12" viewBox="0 0 80 12" opacity="0.3"><path d="M2 6 Q 12 0, 22 6 T 42 6 T 62 6 T 80 6" stroke="#FFA300" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
@@ -2828,19 +3014,12 @@
         </div>
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FFA300"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 3：信任建立 ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-trust" style="padding-top: 60px;">
+  <section class="sec sec-trust">
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-2" style="top:30%;left:8%;" data-parallax="0.5" width="100" height="100" viewBox="0 0 24 24" fill="#fff" opacity="0.08"><circle cx="12" cy="12" r="10"/></svg>
@@ -2918,25 +3097,16 @@
         </a>
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FAFAFA"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 4：三大關鍵能力 ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-skills" id="skills" style="padding-top: 60px;">
+  <section class="sec sec-skills" id="skills">
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:60px;left:5%;" data-parallax="0.3" width="36" height="36" viewBox="0 0 24 24" fill="#FFA300" opacity="0.18"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
     <svg class="deco anim-3" style="top:40%;right:4%;" data-parallax="0.5" width="56" height="56" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.1"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z"/></svg>
-    <svg class="deco anim-wiggle" style="bottom:80px;left:10%;" data-parallax="0.4" width="80" height="14" viewBox="0 0 80 14" opacity="0.3"><path d="M2 7 Q 12 1, 22 7 T 42 7 T 62 7 T 80 7" stroke="#FF5859" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-    <svg class="deco anim-2" style="bottom:120px;right:8%;" data-parallax="0.3" width="24" height="24" viewBox="0 0 24 24" fill="#FFA300" opacity="0.4"><circle cx="12" cy="12" r="10"/></svg>
 
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
@@ -3064,7 +3234,7 @@
           <span class="sec-heading-en" style="color:var(--red);">SURFACE vs REALITY</span>
           這不是 AI 畫圖課，<br>而是<span class="accent-r">問題解決課</span>
         </h2>
-        <p class="sec-desc mx-auto">從外表看，孩子好像是在用 AI 做圖片、故事、影片和遊戲。<br>但實際上，課程背後真正訓練的是 <strong style="color:var(--text);">觀察、表達、拆解、判斷與修正</strong>。</p>
+        <p class="sec-desc mx-auto">從外表看，孩子好像是在用 AI 做圖片、故事、影片和遊戲。<br>但實際上，課程背後真正訓練的是 <strong>觀察、表達、拆解、判斷與修正</strong>。</p>
       </div>
 
       <div class="vs-table">
@@ -3130,13 +3300,6 @@
         而是孩子能不能用 AI 幫助自己<strong>完成一個從想法到成果的完整任務</strong>。
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" fill="#fff"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
@@ -3147,7 +3310,6 @@
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:70px;right:8%;" data-parallax="0.3" width="40" height="40" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
     <svg class="deco anim-3" style="bottom:60px;left:6%;" data-parallax="0.5" width="50" height="50" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.12"><circle cx="12" cy="12" r="10"/></svg>
-    <svg class="deco anim-wiggle" style="top:50%;right:14%;" data-parallax="0.4" width="60" height="10" viewBox="0 0 60 10" opacity="0.4"><path d="M2 5 Q 10 0, 18 5 T 34 5 T 50 5" stroke="#FF5859" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
@@ -3204,19 +3366,12 @@
         AI 不是魔法，而是一個需要被清楚引導的工具。
       </p>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FAFAFA"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 6：四大實戰主題 ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-curriculum" id="curriculum" style="padding-top: 60px;">
+  <section class="sec sec-curriculum" id="curriculum">
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:60px;left:6%;" data-parallax="0.3" width="36" height="36" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
@@ -3369,19 +3524,12 @@
         </div>
       </div>
     </div>
-
-    <!-- 波浪過場 → 深色影片區 -->
-    <div class="wave-divider" style="margin-top:60px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" fill="#1a0f00"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 7：影片區 ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-video" style="padding-top: 60px;">
+  <section class="sec sec-video">
 
     <!-- 背景光暈 -->
     <div class="deco" style="top:-100px;right:-100px;width:320px;height:320px;background:rgba(255,163,0,0.18);border-radius:50%;filter:blur(40px);"></div>
@@ -3425,7 +3573,6 @@
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:80px;right:5%;" data-parallax="0.4" width="42" height="42" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
     <svg class="deco anim-2" style="bottom:120px;left:4%;" data-parallax="0.5" width="60" height="60" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.1"><circle cx="12" cy="12" r="10"/></svg>
-    <svg class="deco anim-wiggle" style="top:50%;right:8%;" data-parallax="0.3" width="60" height="10" viewBox="0 0 60 10" opacity="0.35"><path d="M2 5 Q 10 0, 18 5 T 34 5 T 50 5" stroke="#FF5859" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
@@ -3520,19 +3667,12 @@
 
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FAFAFA"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 8.5：AI 思維 vs AI 實作營 ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-vs-camp" style="padding-top: 60px;">
+  <section class="sec sec-vs-camp">
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:80px;left:6%;" data-parallax="0.3" width="38" height="38" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
@@ -3645,24 +3785,16 @@
 
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,0 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FAFAFA"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 9：FAQ ══ -->
   <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-faq" style="padding-top: 60px;">
+  <section class="sec sec-faq">
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-3" style="top:80px;right:8%;" data-parallax="0.4" width="40" height="40" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.14"><circle cx="12" cy="12" r="10"/></svg>
     <svg class="deco anim-1" style="bottom:80px;left:8%;" data-parallax="0.5" width="32" height="32" viewBox="0 0 24 24" fill="#FFA300" opacity="0.18"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
-    <svg class="deco anim-wiggle" style="top:30%;left:6%;" data-parallax="0.3" width="60" height="10" viewBox="0 0 60 10" opacity="0.3"><path d="M2 5 Q 10 0, 18 5 T 34 5 T 50 5" stroke="#FF5859" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container">
       <div class="text-center" data-aos="fade-up">
@@ -3820,13 +3952,6 @@
 
       </div>
     </div>
-
-    <!-- 波浪過場 -->
-    <div class="wave-divider" style="margin-top:80px;">
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-        <path d="M0,40 Q360,80 720,40 T1440,40 L1440,80 L0,80 Z" fill="#FFA300"/>
-      </svg>
-    </div>
   </section>
 
   <!-- ══════════════════════════════════════ -->
@@ -3836,9 +3961,7 @@
 
     <!-- 背景裝飾 -->
     <svg class="deco anim-1" style="top:80px;left:10%;" data-parallax="0.3" width="48" height="48" viewBox="0 0 24 24" fill="#fff" opacity="0.18"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
-    <svg class="deco anim-spin" style="top:120px;right:14%;" data-parallax="0.4" width="60" height="60" viewBox="0 0 100 100" opacity="0.15">
-      <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="4 6"/>
-    </svg>
+    <svg class="deco anim-spin" style="top:120px;right:14%;" data-parallax="0.4" width="60" height="60" viewBox="0 0 100 100" opacity="0.15"><circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="4 6"/></svg>
     <svg class="deco anim-3" style="bottom:80px;left:6%;" data-parallax="0.5" width="36" height="36" viewBox="0 0 24 24" fill="#fff" opacity="0.2"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z"/></svg>
     <svg class="deco anim-2" style="bottom:120px;right:8%;" data-parallax="0.3" width="32" height="32" viewBox="0 0 24 24" fill="#fff" opacity="0.18"><path d="M12 2v20M2 12h20" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
     <svg class="deco anim-bobble" style="top:50%;left:30%;" data-parallax="0.6" width="20" height="20" viewBox="0 0 24 24" fill="#fff" opacity="0.4"><circle cx="12" cy="12" r="10"/></svg>
