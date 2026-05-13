@@ -3717,38 +3717,48 @@
         border: 1.5px solid rgba(255,255,255,0.12);
         position: relative;
       }
-      .vs-cell { padding: 20px 22px 20px; font-size: 0.98rem; border-radius: 0; border: none; line-height: 1.65; }
+      .vs-cell {
+        padding: 18px 22px 20px;
+        font-size: 0.98rem;
+        border-radius: 0;
+        border: none;
+        line-height: 1.65;
+        align-items: flex-start;
+        gap: 0;
+      }
+      /* 手機隱藏 surface 內的小圖示（label 已夠識別） */
+      .vs-cell-surface .vs-icon { display: none; }
       .vs-cell-surface {
         background: transparent;
         border: none;
         position: relative;
-        padding-top: 38px;
-        gap: 0;
+        padding-top: 42px;
+        display: block;
       }
       .vs-cell-surface::before {
         content: '以為';
         position: absolute;
-        top: 12px; left: 22px;
-        font-size: 0.7rem;
+        top: 14px; left: 22px;
+        font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 1.5px;
-        color: rgba(255,255,255,0.45);
+        color: rgba(255,255,255,0.5);
       }
       .vs-cell-real {
         position: relative;
-        padding-top: 38px;
+        padding-top: 42px;
         border-radius: 0;
         display: block;
       }
       .vs-cell-real::before {
-        content: '實際學到';
+        content: '★ 實際學到';
         position: absolute;
-        top: 11px; left: 22px;
-        font-size: 0.7rem;
+        top: 13px; left: 22px;
+        font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 1.5px;
         color: #fff;
-        opacity: 0.92;
+        opacity: 0.95;
         background: none;
         padding: 0;
       }
