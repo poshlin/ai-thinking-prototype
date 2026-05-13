@@ -1160,6 +1160,119 @@
     }
 
     /* ══════════════════════════════════════
+       sec-intro-card：強對比背景上的描述卡片（玻璃感容器）
+       ── 解決橘色滿版／深色滿版上「裸文字飄浮」的問題
+    ══════════════════════════════════════ */
+    .sec-intro-card {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 26px 32px;
+      border-radius: 22px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      text-align: left;
+    }
+    .sec-intro-card-orange {
+      background: rgba(255,255,255,0.16);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .sec-intro-card-dark {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .sec-intro-line {
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.85;
+      letter-spacing: 0.3px;
+    }
+    .sec-intro-card-orange .sec-intro-line {
+      color: rgba(255,255,255,0.92);
+    }
+    .sec-intro-card-orange .sec-intro-line strong {
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+    .sec-intro-card-dark .sec-intro-line {
+      color: rgba(255,255,255,0.78);
+    }
+    .sec-intro-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+      margin: 14px 0;
+    }
+    .sec-intro-divider-dark {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    }
+    .sec-intro-line-conclusion {
+      font-weight: 600;
+    }
+    /* 橘色版：底部 chip 排列 */
+    .sec-intro-chip {
+      display: inline-block;
+      padding: 4px 12px;
+      margin: 2px 6px 2px 0;
+      background: rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.32);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .sec-intro-suffix {
+      display: inline;
+      color: rgba(255,255,255,0.92);
+      margin-left: 4px;
+    }
+    /* 深色版：對比 label + 紅色 highlight */
+    .sec-intro-label {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .sec-intro-label-gray {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .sec-intro-label-red {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255,88,89,0.4);
+    }
+    .sec-intro-strong-red {
+      display: inline-block;
+      margin-top: 4px;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.08rem;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, rgba(255,88,89,0.18) 0%, rgba(255,88,89,0.08) 100%);
+      border: 1px solid rgba(255,88,89,0.4);
+      padding: 6px 14px;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .sec-intro-card { padding: 22px 20px; border-radius: 18px; }
+      .sec-intro-line { font-size: 0.96rem; line-height: 1.8; }
+      .sec-intro-divider { margin: 12px 0; }
+      .sec-intro-chip { font-size: 0.84rem; padding: 3px 10px; margin: 2px 4px 2px 0; }
+      .sec-intro-label { font-size: 0.72rem; padding: 2px 10px; margin-right: 6px; }
+      .sec-intro-strong-red { font-size: 0.98rem; padding: 5px 12px; letter-spacing: 0.5px; }
+    }
+
+    /* ══════════════════════════════════════
        Section 1.5：為什麼不能只學 AI 工具（3 大論點）
     ══════════════════════════════════════ */
     .sec-reasons { background: #fff; position: relative; }
@@ -4480,7 +4593,16 @@
           <span class="sec-heading-en">WHY US</span>
           十多年累積的<br>程式教育信任
         </h2>
-        <p class="sec-desc mx-auto">從 2012 年起，我們陪伴 100,000+ 個家庭走過程式學習的路。<br>專業師資、國際認證、循序教材，是橘蘋對家長的承諾。</p>
+        <div class="sec-intro-card sec-intro-card-orange" data-aos="fade-up" data-aos-delay="60">
+          <p class="sec-intro-line">從 <strong>2012 年</strong>起，我們陪伴 <strong>100,000+ 個家庭</strong>走過程式學習的路。</p>
+          <div class="sec-intro-divider"></div>
+          <p class="sec-intro-line sec-intro-line-conclusion">
+            <span class="sec-intro-chip">專業師資</span>
+            <span class="sec-intro-chip">國際認證</span>
+            <span class="sec-intro-chip">循序教材</span>
+            <span class="sec-intro-suffix">是橘蘋對家長的承諾。</span>
+          </p>
+        </div>
       </div>
 
       <div class="trust-grid" data-aos="fade-up" data-aos-delay="120">
@@ -4702,7 +4824,18 @@
           <span class="sec-heading-en" style="color:var(--red);">SURFACE vs REALITY</span>
           這不是 AI 畫圖課，<br>而是<span class="accent-r">問題解決課</span>
         </h2>
-        <p class="sec-desc mx-auto">從外表看，孩子好像是在用 AI 做圖片、故事、影片和遊戲。<br>但實際上，課程背後真正訓練的是 <strong>觀察、表達、拆解、判斷與修正</strong>。</p>
+        <div class="sec-intro-card sec-intro-card-dark" data-aos="fade-up" data-aos-delay="60">
+          <p class="sec-intro-line">
+            <span class="sec-intro-label sec-intro-label-gray">從外表看</span>
+            孩子好像是在用 AI 做圖片、故事、影片和遊戲。
+          </p>
+          <div class="sec-intro-divider sec-intro-divider-dark"></div>
+          <p class="sec-intro-line sec-intro-line-conclusion">
+            <span class="sec-intro-label sec-intro-label-red">但實際上</span>
+            課程背後真正訓練的是
+            <strong class="sec-intro-strong-red">觀察 · 表達 · 拆解 · 判斷與修正</strong>
+          </p>
+        </div>
       </div>
 
       <div class="vs-table">
