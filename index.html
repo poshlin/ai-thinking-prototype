@@ -386,6 +386,9 @@
     @media (max-width: 1100px) {
       .oa-nav-links, .btn-nav-login { display: none; }
       .nav-burger { display: flex; }
+      /* 手機把橘色 CTA 縮小避免擠壓 logo */
+      .btn-nav-cta { padding: 8px 14px; font-size: 0.8rem; }
+      .btn-nav-cta svg { display: none; }
       .oa-nav-mobile {
         position: fixed;
         top: 72px; left: 0; right: 0;
@@ -418,6 +421,12 @@
     }
     @media (min-width: 1101px) {
       .oa-nav-mobile { display: none; }
+    }
+    @media (max-width: 600px) {
+      /* 小手機完全隱藏 nav CTA（按鈕已在漢堡選單內，避免遮蓋 Hero 文字） */
+      .btn-nav-cta { display: none; }
+      .oa-nav-inner { padding: 12px 20px; gap: 12px; }
+      .oa-logo img { height: 36px; }
     }
 
     /* ══════════════════════════════════════
@@ -3619,7 +3628,8 @@
       .hero-info-grid { gap: 16px 20px; padding: 16px 0; }
       .hero-info-item { width: calc(50% - 10px); }
       .hero-eyebrow { font-size: 0.84rem; padding: 8px 16px; }
-      .btn-hero-primary, .btn-hero-ghost { font-size: 0.96rem; padding: 14px 24px; }
+      .hero-cta { flex-direction: column; gap: 10px; align-items: stretch; }
+      .btn-hero-primary, .btn-hero-ghost { font-size: 0.98rem; padding: 14px 20px; width: 100%; max-width: 360px; margin: 0 auto; text-align: center; justify-content: center; box-sizing: border-box; display: inline-flex; align-items: center; }
       .demo-prompt-body { padding: 20px 22px 22px; font-size: 0.92rem; min-height: auto; }
       .demo-prompt-comment { font-size: 0.84rem; }
       .demo-result img { width: 220px; height: 220px; }
@@ -3654,18 +3664,119 @@
       .topic-thumb { width: 80px; height: 80px; border-width: 4px; }
       .topic-photo-frame { inset: 4px; border-width: 2px; }
 
-      /* 教學流程 phase 卡片 */
-      .phase-block { padding: 28px 22px; gap: 22px; }
-      .phase-circle { width: 56px; height: 56px; }
-      .phase-emoji { font-size: 1.4rem; }
-      .phase-step { min-width: 64px; }
-      .phase-step-label { font-size: 0.82rem; }
+      /* 教學流程 phase 卡片 - 手機改縱向 5 步 + ↓ 箭頭 */
+      .phase-block { padding: 26px 22px; gap: 20px; }
       .phase-label h3 { font-size: 1.25rem; }
+      .phase-steps {
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+      }
+      .phase-step {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        gap: 18px;
+        min-width: 0;
+        width: 100%;
+        padding: 10px 0;
+        text-align: left;
+      }
+      .phase-circle { width: 56px; height: 56px; flex-shrink: 0; }
+      .phase-emoji { font-size: 1.7rem; }
+      .phase-step-label {
+        font-size: 1.05rem !important;
+        margin-top: 0;
+        font-weight: 700;
+        color: var(--text);
+      }
+      /* ↓ 連接箭頭（每個 step 之間） */
+      .phase-step:not(:last-child)::after {
+        content: '↓';
+        position: absolute;
+        left: 28px;
+        margin-top: 60px;
+        color: var(--orange);
+        opacity: 0.55;
+        font-size: 1.2rem;
+        font-weight: 900;
+        z-index: 1;
+      }
+      .phase-step { position: relative; }
+      .phase-2 .phase-step:not(:last-child)::after { color: var(--teal); }
 
-      /* 對照表（vs 表面） */
-      .vs-row { grid-template-columns: 1fr; gap: 8px; }
-      .vs-arrow { transform: rotate(90deg); padding: 4px; }
-      .vs-cell { padding: 18px 22px; font-size: 1rem; border-radius: 14px; }
+      /* 對照表（vs 表面）- 手機改單卡內部上下排，避免黑橘黑橘循環 */
+      .vs-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+        background: rgba(255,255,255,0.04);
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1.5px solid rgba(255,255,255,0.12);
+        position: relative;
+      }
+      .vs-cell { padding: 16px 22px 18px; font-size: 0.98rem; border-radius: 0; border: none; }
+      .vs-cell-surface {
+        background: transparent;
+        border: none;
+        position: relative;
+        padding-top: 26px;
+      }
+      .vs-cell-surface::before {
+        content: '以為';
+        position: absolute;
+        top: 10px; left: 22px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: rgba(255,255,255,0.4);
+      }
+      .vs-cell-real {
+        position: relative;
+        padding-top: 26px;
+        border-radius: 0;
+      }
+      .vs-cell-real::before {
+        content: '★';
+        font-size: 0.9rem;
+      }
+      .vs-cell-real::after {
+        content: '實際學到';
+        position: absolute;
+        top: 9px; left: 22px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #fff;
+        opacity: 0.85;
+      }
+      /* 箭頭改置中圓形 ↓ */
+      .vs-arrow {
+        transform: none;
+        padding: 0;
+        height: 0;
+        position: relative;
+        z-index: 2;
+      }
+      .vs-arrow svg { display: none; }
+      .vs-arrow::before {
+        content: '↓';
+        position: absolute;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px; height: 32px;
+        background: var(--orange);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 900;
+        box-shadow: 0 6px 16px rgba(255,163,0,0.5);
+        z-index: 3;
+      }
       .vs-summary { font-size: 1.05rem; line-height: 1.85; padding: 28px 22px; border-radius: 20px; }
 
       /* Compare table（vs 實作營） */
@@ -3808,6 +3919,7 @@
       <a href="https://orangeapple.co/about">關於我們</a>
       <a href="https://orangeapple.co/faq">常見問題</a>
       <a href="https://orangeapple.co/users/sign_in">家長／學員登入</a>
+      <a href="https://orangeapple.co/free-trial" style="background: var(--orange); color: #fff; margin: 12px 32px 8px; padding: 14px 24px; border-radius: 50px; text-align: center; font-weight: 700; border: none;">✨ 取得免費試聽</a>
     </div>
   </nav>
 
