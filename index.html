@@ -2072,6 +2072,8 @@
       padding: 2px 10px;
       border-radius: 6px;
       font-weight: 800;
+      display: inline-block;
+      white-space: nowrap;
     }
 
     @media (max-width: 768px) {
@@ -3715,40 +3717,40 @@
         border: 1.5px solid rgba(255,255,255,0.12);
         position: relative;
       }
-      .vs-cell { padding: 16px 22px 18px; font-size: 0.98rem; border-radius: 0; border: none; }
+      .vs-cell { padding: 20px 22px 20px; font-size: 0.98rem; border-radius: 0; border: none; line-height: 1.65; }
       .vs-cell-surface {
         background: transparent;
         border: none;
         position: relative;
-        padding-top: 26px;
+        padding-top: 38px;
+        gap: 0;
       }
       .vs-cell-surface::before {
         content: '以為';
         position: absolute;
-        top: 10px; left: 22px;
+        top: 12px; left: 22px;
         font-size: 0.7rem;
         font-weight: 700;
-        letter-spacing: 1px;
-        color: rgba(255,255,255,0.4);
+        letter-spacing: 1.5px;
+        color: rgba(255,255,255,0.45);
       }
       .vs-cell-real {
         position: relative;
-        padding-top: 26px;
+        padding-top: 38px;
         border-radius: 0;
+        display: block;
       }
       .vs-cell-real::before {
-        content: '★';
-        font-size: 0.9rem;
-      }
-      .vs-cell-real::after {
         content: '實際學到';
         position: absolute;
-        top: 9px; left: 22px;
+        top: 11px; left: 22px;
         font-size: 0.7rem;
         font-weight: 700;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         color: #fff;
-        opacity: 0.85;
+        opacity: 0.92;
+        background: none;
+        padding: 0;
       }
       /* 箭頭改置中圓形 ↓ */
       .vs-arrow {
@@ -3779,11 +3781,78 @@
       }
       .vs-summary { font-size: 1.05rem; line-height: 1.85; padding: 28px 22px; border-radius: 20px; }
 
-      /* Compare table（vs 實作營） */
-      .compare-row { grid-template-columns: 1fr !important; }
-      .compare-cell { padding: 14px 18px !important; border-right: none !important; }
-      .compare-cell.item { background: #2a2a2a; color: #fff; font-weight: 700; }
-      .compare-row.head .compare-cell.right::before { display: none; }
+      /* Compare table（vs 實作營）─ 手機改卡片內 3 段對照 */
+      .compare-table {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-radius: 0;
+        overflow: visible;
+      }
+      .compare-row {
+        grid-template-columns: 1fr !important;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border: 1px solid #f0f0f0;
+      }
+      .compare-row + .compare-row { border-top: 1px solid #f0f0f0 !important; }
+      .compare-row.head {
+        display: none;  /* 手機隱藏 header 列，每個 row 內已有「比較項目」當小標題 */
+      }
+      .compare-cell {
+        padding: 14px 18px !important;
+        border-right: none !important;
+        font-size: 0.96rem !important;
+        line-height: 1.55;
+        position: relative;
+      }
+      /* 第一欄：比較項目（黑底白字小標） */
+      .compare-cell.item {
+        background: var(--text) !important;
+        color: #fff !important;
+        font-weight: 700;
+        font-size: 0.86rem !important;
+        letter-spacing: 1px;
+        text-align: center;
+        padding: 10px 18px !important;
+      }
+      /* 第二欄：AI 實作營（左，淡灰） */
+      .compare-cell.left {
+        background: #fafafa;
+        color: var(--gray);
+        padding-top: 32px !important;
+      }
+      .compare-cell.left::before {
+        content: 'AI 實作營';
+        position: absolute;
+        top: 10px; left: 18px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--gray);
+        opacity: 0.7;
+      }
+      /* 第三欄：AI 思維課（右，橘色推薦） */
+      .compare-cell.right {
+        background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%);
+        color: var(--text);
+        font-weight: 700;
+        padding-top: 32px !important;
+      }
+      .compare-cell.right::before {
+        content: '★ AI 思維課';
+        position: absolute;
+        top: 10px; left: 18px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--orange-dark);
+      }
 
       /* Suitable */
       .suitable-col { padding: 28px 22px; border-radius: 22px; }
@@ -3991,11 +4060,11 @@
           </div>
 
           <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
-            <a href="#cta" class="btn-hero-primary">
-              預約體驗試聽
+            <a href="#curriculum" class="btn-hero-primary">
+              查看完整大綱
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="#syllabus" class="btn-hero-ghost">查看完整大綱</a>
+            <a href="#syllabus" class="btn-hero-ghost">看 15 個驚人成就</a>
           </div>
         </div>
 
