@@ -549,6 +549,13 @@
       font-size: 1.05rem;
       color: var(--text);
       font-weight: 700;
+      line-height: 1.35;
+    }
+    .hero-info-sub {
+      font-size: 0.78rem;
+      color: var(--gray);
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
 
     /* CTA 按鈕（紅 + 白底邊框） */
@@ -2843,33 +2850,94 @@
       background: linear-gradient(135deg, rgba(255,163,0,0.12) 0%, rgba(255,163,0,0.04) 100%);
     }
 
+    /* VS Camp 區段：sec-desc 重設計 */
+    .vs-camp-desc {
+      font-size: 1.06rem;
+      line-height: 1.95;
+      color: var(--gray);
+    }
+    .vs-camp-desc strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .vs-camp-key {
+      display: inline-block;
+      padding: 2px 12px;
+      background: var(--orange-pale);
+      color: var(--orange-dark);
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+    }
+
     .compare-summary {
-      max-width: 880px;
+      max-width: 920px;
       margin: 56px auto 0;
-      padding: 36px 40px;
+      padding: 40px 44px;
       background: linear-gradient(135deg, var(--orange) 0%, #ff8a00 100%);
       color: #fff;
       border-radius: 28px;
-      text-align: center;
-      font-size: 1.12rem;
-      line-height: 1.85;
-      font-weight: 700;
       box-shadow: 0 16px 44px rgba(255,163,0,0.32);
       position: relative;
+      overflow: hidden;
     }
     .compare-summary::before {
       content: '"';
       position: absolute;
-      top: -10px; left: 28px;
+      top: 4px; left: 28px;
       font-size: 6rem;
       line-height: 1;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.18);
       font-family: Georgia, serif;
+      pointer-events: none;
     }
-    .compare-summary strong {
-      background: rgba(255,255,255,0.22);
-      padding: 2px 10px;
-      border-radius: 4px;
+    .compare-summary-line {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+    .cs-tag {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+    .cs-tag-strong {
+      background: #fff;
+      color: var(--orange-dark);
+      border-color: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+    .cs-text {
+      flex: 1;
+      min-width: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.7;
+      color: #fff;
+    }
+    .cs-text strong {
+      font-weight: 900;
+      font-size: 1.16rem;
+      letter-spacing: 0.3px;
+    }
+    .compare-summary-line.cs-highlight .cs-text strong {
+      text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .compare-summary-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.28);
+      margin: 4px 0;
     }
 
     @media (max-width: 768px) {
@@ -2877,6 +2945,12 @@
       .compare-cell { border-right: none !important; }
       .compare-row.head .compare-cell.left::before { content: '✗ '; }
       .compare-row.head .compare-cell.right::before { display:none; }
+      .compare-summary { padding: 32px 24px; }
+      .compare-summary::before { font-size: 4.5rem; left: 16px; }
+      .compare-summary-line { gap: 10px; padding: 6px 0; }
+      .cs-tag { padding: 5px 12px; font-size: 0.84rem; }
+      .cs-text { font-size: 0.98rem; flex-basis: 100%; }
+      .cs-text strong { font-size: 1.02rem; }
     }
 
     /* ══════════════════════════════════════
@@ -3641,7 +3715,7 @@
       .demo-arrow-line { height: 32px; }
       .trust-num { font-size: 2.8rem; }
       .trust-lbl { font-size: 1rem; }
-      .compare-summary, .vs-summary { font-size: 1.02rem; padding: 26px 22px; }
+      .vs-summary { font-size: 1.02rem; padding: 26px 22px; }
 
       /* 卡片 padding 收斂 */
       .quote-card { padding: 36px 24px 28px; border-radius: 24px; }
@@ -3901,7 +3975,7 @@
       .topic-thumb { width: 64px; height: 64px; }
       .vs-cell { font-size: 0.94rem; padding: 16px 18px; }
       .footer-cta h2 { font-size: 1.55rem; }
-      .compare-summary, .vs-summary { font-size: 0.95rem; line-height: 1.8; }
+      .vs-summary { font-size: 0.95rem; line-height: 1.8; }
     }
   </style>
 </head>
@@ -4053,7 +4127,7 @@
               </div>
               <div>
                 <div class="hero-info-label">課程時數</div>
-                <div class="hero-info-value">30 小時 (2h × 15)</div>
+                <div class="hero-info-value">30 小時<br><span class="hero-info-sub">(2h × 15)</span></div>
               </div>
             </div>
             <div class="hero-info-item">
@@ -4062,7 +4136,7 @@
               </div>
               <div>
                 <div class="hero-info-label">上課方式</div>
-                <div class="hero-info-value">實體 / 線上同步</div>
+                <div class="hero-info-value">線上</div>
               </div>
             </div>
           </div>
@@ -5015,7 +5089,10 @@
           <span class="sec-heading-en">AI THINKING vs AI CAMP</span>
           上過 AI 實作營，<br>跟這堂有<span class="accent-o">什麼不同</span>？
         </h2>
-        <p class="sec-desc mx-auto">如果孩子之前上過 AI 實作營，來上 AI 思維課會更有感覺。<br>因為兩者的定位不同，不是互相取代，而是 <strong style="color:var(--text);">學習深度不同</strong>。</p>
+        <p class="sec-desc mx-auto vs-camp-desc">
+          孩子如果上過 <strong>AI 實作營</strong>，再來上 AI 思維課會更有感覺。<br>
+          兩者並非互相取代，差別在於 <span class="vs-camp-key">學習深度不同</span>。
+        </p>
       </div>
 
       <div class="compare-table" data-aos="fade-up" data-aos-delay="100">
@@ -5053,8 +5130,15 @@
       </div>
 
       <div class="compare-summary" data-aos="fade-up" data-aos-delay="200">
-        AI 實作營讓孩子知道 <strong>「AI 可以做什麼」</strong>，<br>
-        AI 思維課讓孩子學會 <strong>「怎麼讓 AI 幫我做到我想要的」</strong>。
+        <div class="compare-summary-line">
+          <span class="cs-tag">AI 實作營</span>
+          <span class="cs-text">讓孩子知道<strong>「AI 可以做什麼」</strong></span>
+        </div>
+        <div class="compare-summary-divider"></div>
+        <div class="compare-summary-line cs-highlight">
+          <span class="cs-tag cs-tag-strong">AI 思維課</span>
+          <span class="cs-text">讓孩子學會<strong>「怎麼讓 AI 幫我做到我想要的」</strong></span>
+        </div>
       </div>
     </div>
   </section>
