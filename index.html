@@ -47,6 +47,9 @@
       background: #fff;
       cursor: default;
     }
+    /* button 元素預設不繼承字體 */
+    button { font-family: inherit;
+    }
 
     /* 滑鼠跟隨光暈 */
     .cursor-glow {
@@ -588,6 +591,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      font-family: inherit;  /* button 元素預設不繼承字體 */
     }
     .btn-hero-primary:hover {
       background: #ff4548;
@@ -4746,6 +4750,182 @@
       /* 預留底部空間，避免 sticky 條遮住內容 */
       body { padding-bottom: 76px; }
     }
+
+    /* ══════════════════════════════════════
+       試聽諮詢 Modal（本地版，正式上線會換成官網既有的 #potentialStudentModal）
+    ══════════════════════════════════════ */
+    #trialModal .modal-dialog { max-width: 540px; }
+    .trial-modal-content {
+      border-radius: 18px !important;
+      border: none !important;
+      overflow: hidden;
+      position: relative;
+    }
+    .trial-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 10;
+      width: 36px; height: 36px;
+      border: none;
+      background: rgba(0,0,0,0.05);
+      border-radius: 50%;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .trial-modal-close:hover { background: rgba(0,0,0,0.1); }
+    .trial-modal-body { padding: 36px 32px 28px; }
+    .trial-modal-title {
+      font-size: 1.32rem;
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      margin: 0 0 14px;
+      letter-spacing: -0.3px;
+    }
+    .trial-modal-desc {
+      font-size: 0.92rem;
+      color: var(--gray);
+      text-align: center;
+      line-height: 1.7;
+      margin: 0 0 24px;
+    }
+    .trial-form { display: block; }
+    .trial-row { margin-bottom: 16px; }
+    .trial-row-radio {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #f0e6d6;
+      margin-bottom: 18px;
+    }
+    .trial-radio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.96rem;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .trial-radio input { accent-color: var(--orange); cursor: pointer; }
+    .trial-label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .trial-required { color: var(--red); margin-left: 2px; }
+    .trial-hint { color: var(--gray); font-weight: 400; font-size: 0.84rem; }
+    .trial-input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 0.96rem;
+      border: 1.5px solid #e8e0d0;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font-family: inherit;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .trial-input:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+    select.trial-input { cursor: pointer; }
+    .trial-phone-wrap {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .trial-phone-flag {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      background: #f8f4eb;
+      border: 1.5px solid #e8e0d0;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+    }
+    .trial-phone-input { flex: 1; min-width: 0; }
+    .trial-recaptcha-stub {
+      margin: 18px 0 16px;
+      padding: 16px 18px;
+      background: #f8f8f8;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: var(--gray);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .trial-recaptcha-stub small { color: #999; font-size: 0.78rem; }
+    .trial-submit-btn {
+      width: 100%;
+      padding: 14px 20px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(255,163,0,0.32);
+    }
+    .trial-submit-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(255,163,0,0.45);
+    }
+    .trial-policy {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin: 14px 0 0;
+    }
+    .trial-policy a { color: var(--orange-dark); text-decoration: underline; }
+    .trial-success {
+      text-align: center;
+      padding: 16px 0;
+    }
+    .trial-success-icon {
+      margin: 0 auto 16px;
+      width: 80px; height: 80px;
+      background: rgba(0,196,179,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .trial-success h3 {
+      font-size: 1.32rem;
+      color: var(--text);
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .trial-success p {
+      font-size: 0.96rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin: 0;
+    }
+    @media (max-width: 575px) {
+      .trial-modal-body { padding: 28px 22px 22px; }
+      .trial-modal-title { font-size: 1.18rem; }
+      .trial-modal-desc { font-size: 0.86rem; }
+    }
   </style>
 </head>
 
@@ -4813,9 +4993,9 @@
       </ul>
 
       <div class="oa-nav-right">
-        <a href="https://orangeapple.co/free-trial" class="btn-nav-cta" target="_blank" rel="noopener">
+        <button type="button" class="btn-nav-cta" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
           預約課程介紹
-        </a>
+        </button>
         <a href="https://orangeapple.co/users/sign_in" class="btn-nav-login">家長／學員登入</a>
         <button class="nav-burger" id="navBurger" aria-label="選單">
           <span></span><span></span><span></span>
@@ -4839,7 +5019,7 @@
       <a href="https://orangeapple.co/about">關於我們</a>
       <a href="https://orangeapple.co/faq">常見問題</a>
       <a href="https://orangeapple.co/users/sign_in">家長／學員登入</a>
-      <a href="https://orangeapple.co/free-trial" target="_blank" rel="noopener" style="background: var(--orange); color: #fff; margin: 12px 32px 8px; padding: 14px 24px; border-radius: 50px; text-align: center; font-weight: 700; border: none;">✨ 預約課程介紹</a>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial" style="background: var(--orange); color: #fff; margin: 12px 32px 8px; padding: 14px 24px; border-radius: 50px; text-align: center; font-weight: 500; border: none; cursor: pointer; font-family: inherit; font-size: 1rem;">✨ 預約課程介紹</button>
     </div>
   </nav>
 
@@ -4912,10 +5092,10 @@
           </div>
 
           <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
-            <a href="https://orangeapple.co/free-trial" class="btn-hero-primary" target="_blank" rel="noopener">
+            <button type="button" class="btn-hero-primary" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
               預約 1 對 1 課程介紹
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+            </button>
             <a href="#video" class="btn-hero-ghost">先看 60 秒影片</a>
           </div>
         </div>
@@ -5438,10 +5618,10 @@
       <div class="highlight-dots" aria-hidden="true"></div>
 
       <div class="trust-cta" data-aos="fade-up" data-aos-delay="280">
-        <a href="https://orangeapple.co/free-trial" class="btn-trust-cta" target="_blank" rel="noopener">
+        <button type="button" class="btn-trust-cta" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
           預約專人課程介紹
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        </button>
       </div>
     </div>
   </section>
@@ -6378,10 +6558,10 @@
       <span class="footer-cta-en">JOIN US NOW</span>
       <h2>準備好讓孩子<br>跟 AI 一起完成任務了嗎？</h2>
       <p>由橘蘋專人為孩子規劃合適的學習路徑</p>
-      <a href="https://orangeapple.co/free-trial" class="btn-footer" target="_blank" rel="noopener">
+      <button type="button" class="btn-footer" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
         預約免費課程介紹
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      </button>
       <p class="footer-cta-sub">想先體驗橘蘋的線上教學品質？<a href="https://orangeapple.co" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;font-weight:700;">預約 Minecraft、Python、Scratch 或 Roblox 等常態課程試聽 →</a></p>
     </div>
   </section>
@@ -6398,7 +6578,7 @@
           <h5>關於橘蘋</h5>
           <ul class="footer-links">
             <li><a href="https://orangeapple.co/about">關於我們</a></li>
-            <li><a href="https://orangeapple.co/free-trial">免費課程諮詢</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">免費課程諮詢</a></li>
             <li><a href="https://orangeapple.co/faq">常見問題</a></li>
             <li><a href="https://orangeapple.co/locations">教學據點</a></li>
             <li><a href="https://orangeapple.co/cooperation">合作機會</a></li>
@@ -6499,16 +6679,128 @@
 
   <!-- 手機底部 sticky CTA 條（< 768px 才顯示） -->
   <div class="mobile-sticky-cta" id="mobile-sticky-cta" aria-hidden="true">
-    <a href="https://orangeapple.co/free-trial" target="_blank" rel="noopener" class="mobile-sticky-btn">
+    <button type="button" class="mobile-sticky-btn" data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       <span>預約 1 對 1 課程介紹</span>
-    </a>
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ══ 試聽諮詢 Modal（本地版） ══ -->
+  <!-- ══════════════════════════════════════ -->
+  <!-- ⚠ 工程師：上線到 Rails 時，請把這整段 #trialModal 換掉，改用 orangeapple.co 既有的 #potentialStudentModal。
+       對應做法：button 改 data-bs-target="#potentialStudentModal"，並引入官網的 modal partial。 -->
+  <div class="modal fade" id="trialModal" tabindex="-1" aria-labelledby="trialModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content trial-modal-content">
+        <button type="button" class="trial-modal-close" data-bs-dismiss="modal" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="trial-modal-body">
+          <h2 class="trial-modal-title" id="trialModalTitle">立即領取一堂兒童程式試聽課</h2>
+          <p class="trial-modal-desc">橘子蘋果的創立宗旨為：「普及化臺灣的兒童程式教育。」<br>因此我們願提供所有有興趣讓孩子接觸程式的家長一堂免費的體驗課程，親身體驗，孩子喜不喜歡最重要！</p>
+
+          <form class="trial-form" onsubmit="return handleTrialSubmit(event)">
+            <div class="trial-row trial-row-radio">
+              <label class="trial-radio">
+                <input type="radio" name="region" value="tw" checked>
+                <span>台灣地區</span>
+              </label>
+              <label class="trial-radio">
+                <input type="radio" name="region" value="overseas">
+                <span>海外</span>
+              </label>
+            </div>
+
+            <div class="trial-row">
+              <label class="trial-label">學生年級 <span class="trial-required">*</span></label>
+              <input type="text" class="trial-input" name="grade" placeholder="例：小三、國一" required>
+            </div>
+
+            <div class="trial-row">
+              <label class="trial-label">聯絡電話 <span class="trial-hint">(請輸入手機號碼)</span> <span class="trial-required">*</span></label>
+              <div class="trial-phone-wrap">
+                <span class="trial-phone-flag">🇹🇼 +886</span>
+                <input type="tel" class="trial-input trial-phone-input" name="phone" placeholder="0912 345 678" required>
+              </div>
+            </div>
+
+            <div class="trial-row">
+              <label class="trial-label">所在縣市 <span class="trial-required">*</span></label>
+              <select class="trial-input" name="city" required>
+                <option value="">選擇縣市</option>
+                <option>台北市</option><option>新北市</option><option>桃園市</option>
+                <option>台中市</option><option>台南市</option><option>高雄市</option>
+                <option>基隆市</option><option>新竹市</option><option>新竹縣</option>
+                <option>苗栗縣</option><option>彰化縣</option><option>南投縣</option>
+                <option>雲林縣</option><option>嘉義市</option><option>嘉義縣</option>
+                <option>屏東縣</option><option>宜蘭縣</option><option>花蓮縣</option>
+                <option>台東縣</option><option>澎湖縣</option><option>金門縣</option>
+                <option>連江縣</option>
+              </select>
+            </div>
+
+            <div class="trial-row">
+              <label class="trial-label">所在區域 <span class="trial-required">*</span></label>
+              <input type="text" class="trial-input" name="district" placeholder="例：信義區" required>
+            </div>
+
+            <div class="trial-row">
+              <label class="trial-label">偏好課程進行方式 <span class="trial-required">*</span></label>
+              <select class="trial-input" name="format" required>
+                <option value="">請選擇</option>
+                <option>線上課程</option>
+                <option>實體教室</option>
+                <option>都可以</option>
+              </select>
+            </div>
+
+            <div class="trial-recaptcha-stub">
+              <span>☑ 我不是機器人</span>
+              <small>（正式版包含 reCAPTCHA 驗證）</small>
+            </div>
+
+            <button type="submit" class="trial-submit-btn">送出</button>
+            <p class="trial-policy">送出資料即代表同意我們的<a href="https://orangeapple.co/privacy" target="_blank" rel="noopener">隱私權條款</a></p>
+          </form>
+
+          <!-- 提交後成功畫面 -->
+          <div class="trial-success" hidden>
+            <div class="trial-success-icon">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#00C4B3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3>已收到您的預約</h3>
+            <p>橘蘋專人會在 1-2 個工作天內主動與您聯繫，<br>說明完整課程方案。感謝您！</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, offset: 50, duration: 800 });
+
+    // 試聽諮詢 modal：提交後切換到成功畫面（本地 prototype 模擬，正式 Rails 接 API）
+    function handleTrialSubmit(e) {
+      e.preventDefault();
+      const modal = document.getElementById('trialModal');
+      if (!modal) return false;
+      const form = modal.querySelector('.trial-form');
+      const success = modal.querySelector('.trial-success');
+      // 簡單提交模擬：隱藏表單、顯示成功訊息
+      form.style.display = 'none';
+      success.hidden = false;
+      // 關閉 modal 時重置
+      modal.addEventListener('hidden.bs.modal', function reset() {
+        form.style.display = 'block';
+        form.reset();
+        success.hidden = true;
+        modal.removeEventListener('hidden.bs.modal', reset);
+      });
+      return false;
+    }
 
     // 手機 sticky CTA：捲過 Hero 後才顯示，捲到 Footer CTA 區時隱藏
     (function() {

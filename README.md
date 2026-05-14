@@ -118,9 +118,18 @@ ai-thinking-prototype/
   <iframe src="https://www.youtube.com/embed/irlNGTb-ypc" ...></iframe>
   ```
 
-### F. 表單／CTA 串接
-- 所有「取得免費試聽」「立即報名」按鈕目前指向 `#cta` 或 `https://orangeapple.co/free-trial`
-- 上線時改為實際的試聽預約表單路由
+### F. 表單／CTA 串接（Modal 整合）
+- 全頁 5 處 CTA（nav / hero / trust / footer / sticky）都使用 Bootstrap modal trigger：
+  ```html
+  <button data-bs-toggle="modal" data-bs-target="#trialModal" data-content-type="for-trial">
+    預約 1 對 1 課程介紹
+  </button>
+  ```
+- 目前 prototype 內含一個本地版的 `#trialModal`（試聽諮詢表單），位於 HTML 結尾、scripts 之前
+- **上線到 Rails 時請執行以下兩件事**：
+  1. **刪除** prototype 內的 `<div class="modal fade" id="trialModal">...</div>` 整段
+  2. **將所有按鈕** `data-bs-target="#trialModal"` **改為** `data-bs-target="#potentialStudentModal"`，串接官網既有的 modal partial
+- 同樣需處理：footer 連結列「免費課程諮詢」、`handleTrialSubmit()` JS 函式（本地模擬，正式版由官網 Rails controller 處理）
 
 ### G. RWD 已處理
 - 設計稿已測試桌面 / 平板 / 手機三種斷點
