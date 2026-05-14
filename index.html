@@ -2610,9 +2610,50 @@
     }
     .phase-2 .phase-arrow { color: rgba(0,196,179,0.5); }
 
+    /* 桌面：phase-wrap 與 phase-dots 不影響原本佈局 */
+    .phase-wrap { display: block; }
+    .phase-dots { display: none; }
+
     @media (max-width: 991px) {
       .phase-block { grid-template-columns: 1fr; padding: 32px 28px; gap: 24px; }
       .phase-arrow { display: none; }
+    }
+    /* 手機：phase-wrap 改橫向 scroll-snap carousel */
+    @media (max-width: 768px) {
+      .phase-wrap {
+        display: flex;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 0 -20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .phase-wrap::-webkit-scrollbar { display: none; }
+      .phase-block {
+        flex: 0 0 88%;
+        scroll-snap-align: center;
+        margin: 0 !important;
+        min-width: 0;
+      }
+      .phase-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .phase-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,163,0,0.32);
+        transition: all 0.25s;
+      }
+      .phase-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
+      }
     }
 
     .flow-rail {
@@ -5473,6 +5514,7 @@
         <p class="sec-desc mx-auto">這堂課的設計重點，是讓孩子在每一堂課都反覆練習<br><strong style="color:var(--text);">「觀察、描述、生成、比較、修正」</strong>。孩子不是看老師示範，而是自己操作、自己判斷、自己調整。</p>
       </div>
 
+      <div class="phase-wrap">
       <!-- Phase 1：表達練習 -->
       <div class="phase-block phase-1" data-aos="fade-up" data-aos-delay="80">
         <div class="phase-label">
@@ -5512,6 +5554,8 @@
           <div class="phase-step"><div class="phase-circle"><span class="phase-emoji">🛠</span></div><div class="phase-step-label">調整修正</div></div>
         </div>
       </div>
+      </div>
+      <div class="phase-dots" aria-hidden="true"></div>
 
       <p class="text-center" style="max-width: 760px; margin: 32px auto 0; font-size: 1rem; color: var(--gray); line-height: 1.85;" data-aos="fade-up">
         透過原圖與 AI 生成圖的差異，孩子會直觀理解：<strong style="color:var(--text);">描述越模糊，AI 越失準；描述越精準，AI 越接近自己想要的結果。</strong>
@@ -6292,6 +6336,7 @@
       initCarousel('.trust-grid', '.trust-dots', '.trust-card');
       initCarousel('.highlight-grid', '.highlight-dots', '.highlight-card');
       initCarousel('.quality-grid', '.quality-dots', '.quality-card');
+      initCarousel('.phase-wrap', '.phase-dots', '.phase-block');
     })();
 
     // Info-table 分組 Tabs（手機分類切換）
