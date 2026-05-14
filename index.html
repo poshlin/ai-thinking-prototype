@@ -31,9 +31,15 @@
       --bg-light:    #FAFAFA;
     }
 
+    html {
+      font-size: 18px;  /* rem 基準從 16 提高到 18，全站文字 +12.5% */
+    }
+    @media (max-width: 768px) {
+      html { font-size: 17px; }  /* 手機略小一階，避免版面爆出 */
+    }
     body {
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 17px;
+      font-size: 1rem;  /* = 18px / 17px（手機）*/
       color: var(--text);
       overflow-x: hidden;
       margin: 0;
@@ -757,7 +763,7 @@
     }
     .hero-quote-text strong {
       color: var(--orange-dark);
-      font-weight: 800;
+      font-weight: 500;  /* 不粗體：橘色底 + 中文筆劃多會糊 */
       background: rgba(255,163,0,0.16);
       padding: 1px 8px;
       border-radius: 4px;
@@ -871,7 +877,7 @@
     }
     .demo-prompt-text .keyword {
       color: #ffa680;
-      font-weight: 700;
+      font-weight: 500;  /* 不粗體：避免在暗底配深強調色時筆劃糊在一起 */
     }
     /* Typewriter 用：char span 逐個出現 */
     .demo-prompt-text .char {
@@ -1483,9 +1489,10 @@
     }
     .reason-panel-text:last-child { margin-bottom: 0; }
     /* strong：用白底 + 主色字（跟 tinted bg 形成清楚對比） */
+    /* 不粗體：中文筆劃多，800 字重在底色上會糊在一起 */
     .reason-panel-text strong {
       color: var(--orange-dark);
-      font-weight: 800;
+      font-weight: 500;
       background: rgba(255,255,255,0.78);
       padding: 1px 10px;
       border-radius: 6px;
@@ -1495,27 +1502,53 @@
     .reason-panel-item[data-color="t"] .reason-panel-text strong { color: #008678; background: rgba(255,255,255,0.82); }
 
     @media (max-width: 768px) {
-      .reasons-tabs {
+      /* 手機：隱藏小 tab，panel 改橫向 carousel，使用者直接滑大框 */
+      .reasons-tabs { display: none; }
+      .reason-panels {
         display: flex;
+        flex-direction: row;
         overflow-x: auto;
-        gap: 12px;
-        padding: 4px 20px 12px;
-        margin: 0 -20px 24px;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 32px -20px 0;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        position: relative;
       }
-      .reasons-tabs::-webkit-scrollbar { display: none; }
-      .reason-tab-btn {
-        flex: 0 0 80%;
+      .reason-panels::-webkit-scrollbar { display: none; }
+      .reason-panel-item {
+        display: block !important;     /* 覆蓋 desktop 的 display: none */
+        animation: none !important;     /* 不需 panelIn 動畫 */
+        flex: 0 0 88%;
         scroll-snap-align: center;
-        padding: 16px 18px;
+        padding: 28px 22px;
+        border-radius: 20px;
+        min-width: 0;
       }
-      .reason-panel-item { padding: 28px 22px; border-radius: 20px; }
       .reason-panel-title { font-size: 1.25rem; }
       .reason-panel-head { gap: 12px; }
       .reason-panel-icon { width: 48px; height: 48px; font-size: 1.4rem; }
+      /* dots 指示器 */
+      .reason-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .reason-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,163,0,0.25);
+        transition: all 0.25s;
+      }
+      .reason-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
+      }
     }
+    .reason-dots { display: none; }  /* 桌面隱藏 */
 
     /* ══════════════════════════════════════
        Section 2：課程定位
@@ -1553,7 +1586,7 @@
     }
     .quote-card strong {
       color: var(--orange-dark);
-      font-weight: 800;
+      font-weight: 500;  /* 不粗體：橘底+中文筆劃多會糊 */
       background: rgba(255,163,0,0.22);
       padding: 2px 10px;
       border-radius: 6px;
@@ -1613,6 +1646,7 @@
       background: var(--red);
       padding: 2px 8px;
       border-radius: 4px;
+      font-weight: 500;  /* 不粗體：紅底白字 + 中文筆劃多會糊 */
     }
     /* 桌面：info-tabs 不顯示（桌面看全表） */
     .info-tabs { display: none; }
@@ -2172,12 +2206,12 @@
       top: -16px; left: 24px;
       background: var(--orange);
       color: #fff;
-      font-size: 0.78rem;
-      font-weight: 800;
+      font-size: 0.86rem;
+      font-weight: 500;  /* 不粗體：橘底白字 + 中文筆劃多會糊 */
       padding: 6px 14px;
       border-radius: 8px;
       box-shadow: 0 6px 18px rgba(255,163,0,0.4);
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
 
     .skill-corner-deco {
@@ -2509,7 +2543,7 @@
       background: rgba(0,0,0,0.22);
       padding: 2px 10px;
       border-radius: 6px;
-      font-weight: 800;
+      font-weight: 500;  /* 不粗體：底色+中文筆劃多 */
       display: inline-block;
     }
     @media (max-width: 768px) {
@@ -3277,7 +3311,7 @@
     .compare-row.head {
       background: var(--text);
       color: #fff;
-      font-weight: 700;
+      font-weight: 500;  /* 不粗體：深底白字 + 中文筆劃多 */
     }
     .compare-row.head .compare-cell { color: #fff; padding: 22px 28px; font-size: 0.98rem; letter-spacing: 1px; }
     .compare-row.head .compare-cell.item {
@@ -3340,7 +3374,7 @@
       background: var(--orange-pale);
       color: var(--orange-dark);
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 500;  /* 不粗體：底色 chip + 中文筆劃多 */
       font-size: 1rem;
       letter-spacing: 0.3px;
     }
@@ -3382,7 +3416,7 @@
       color: #fff;
       border-radius: 999px;
       font-size: 0.92rem;
-      font-weight: 700;
+      font-weight: 500;  /* 不粗體：底色 chip + 中文筆劃多 */
       letter-spacing: 0.5px;
       border: 1.5px solid rgba(255,255,255,0.3);
     }
@@ -3401,7 +3435,7 @@
       color: #fff;
     }
     .cs-text strong {
-      font-weight: 900;
+      font-weight: 600;  /* 從 900 降到 600：底色強強對比下中文筆劃會糊 */
       font-size: 1.16rem;
       letter-spacing: 0.3px;
     }
@@ -3651,7 +3685,7 @@
       align-items: center;
       gap: 6px;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 500;  /* 不粗體：底色 chip + 中文筆劃多 */
       color: var(--orange-dark);
       background: var(--orange-pale);
       padding: 5px 12px;
@@ -3879,28 +3913,52 @@
       .ach-grid { grid-template-columns: repeat(2, 1fr); }
     }
     .ach-dots { display: none; }
+    .lp-dots { display: none; }   /* 桌面隱藏 */
     @media (max-width: 768px) {
-      /* 手機橫向滑動 tabs */
-      .lp-tabs {
-        display: flex;
+      /* 手機：隱藏小 tab，panel 直接橫向滑 */
+      .lp-tabs { display: none; }
+      .lp-panels {
+        display: flex !important;
+        flex-direction: row;
         overflow-x: auto;
         gap: 14px;
-        padding: 4px 20px 12px;
-        margin: 0 -20px 24px;
+        padding: 6px 20px 16px;
+        margin: 32px -20px 0;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
-      .lp-tabs::-webkit-scrollbar { display: none; }
-      .lp-tab {
-        flex: 0 0 78%;
+      .lp-panels::-webkit-scrollbar { display: none; }
+      .lp-panel {
+        display: grid !important;       /* 覆蓋 desktop 的 display: none */
+        animation: none !important;
+        flex: 0 0 88%;
         scroll-snap-align: center;
+        padding: 28px 22px;
+        gap: 22px;
+        border-radius: 22px;
+        grid-template-columns: 1fr;
         min-width: 0;
       }
-      .lp-tab-desc { min-height: auto; }
-      .lp-panel { padding: 28px 22px; gap: 22px; border-radius: 22px; }
       .lp-panel-num { font-size: 3rem; }
       .lp-lesson { padding: 14px 18px; grid-template-columns: 36px 1fr 22px; gap: 14px; }
+      .lp-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .lp-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,163,0,0.25);
+        transition: all 0.25s;
+      }
+      .lp-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
+      }
 
       /* ach-grid 改橫向 carousel */
       .ach-grid {
@@ -4069,7 +4127,7 @@
     }
     .faq-item.open .faq-a { max-height: 400px; }
     .faq-a-inner { padding: 4px 30px 26px 84px; }
-    .faq-a strong { color: var(--orange-dark); font-weight: 700; background: var(--orange-pale); padding: 1px 8px; border-radius: 4px; }
+    .faq-a strong { color: var(--orange-dark); font-weight: 500; background: var(--orange-pale); padding: 1px 8px; border-radius: 4px; }  /* 不粗體：底色 + 中文筆劃多 */
 
     /* ══════════════════════════════════════
        Footer CTA
@@ -5056,6 +5114,7 @@
         </div>
 
       </div>
+      <div class="reason-dots" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -5585,13 +5644,7 @@
 
         </div>
 
-        <div class="skills-dots" role="tablist">
-          <button class="skills-dot active" data-index="0" aria-label="Skill 1"></button>
-          <button class="skills-dot" data-index="1" aria-label="Skill 2"></button>
-          <button class="skills-dot" data-index="2" aria-label="Skill 3"></button>
-          <button class="skills-dot" data-index="3" aria-label="Skill 4"></button>
-          <button class="skills-dot" data-index="4" aria-label="Skill 5"></button>
-        </div>
+        <div class="skills-dots" role="tablist"></div>
       </div>
       </div>
     </div>
@@ -5909,6 +5962,7 @@
         </div>
 
       </div>
+      <div class="lp-dots" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -6568,6 +6622,8 @@
       initCarousel('.suitable-grid', '.suitable-dots', '.suitable-col');
       initCarousel('.vs-table', '.vs-dots', '.vs-row');
       initCarousel('.compare-table', '.compare-dots', '.compare-row:not(.head)');
+      initCarousel('.reason-panels', '.reason-dots', '.reason-panel-item');
+      initCarousel('.lp-panels', '.lp-dots', '.lp-panel');
     })();
 
     // FAQ 分類 Chips（手機分類過濾）
@@ -6663,13 +6719,36 @@
       if (!carousel) return;
       const prevBtn = document.querySelector('.skills-nav.prev');
       const nextBtn = document.querySelector('.skills-nav.next');
-      const dots = document.querySelectorAll('.skills-dot');
+      const dotsWrap = document.querySelector('.skills-dots');
+      const totalCards = carousel.querySelectorAll('.skill-card').length;
 
       const cardStep = () => {
         const card = carousel.querySelector('.skill-card');
         if (!card) return 280;
         return card.offsetWidth + 24;
       };
+      const visibleCount = () => Math.max(1, Math.round(carousel.clientWidth / cardStep()));
+      // 「頁數」= 滑到底為止需要幾個 scroll 位置（包含起點）
+      const pageCount = () => Math.max(1, totalCards - visibleCount() + 1);
+
+      // 動態建立 dots（依目前 viewport 算出頁數）
+      let dots = [];
+      function buildDots() {
+        if (!dotsWrap) return;
+        const pages = pageCount();
+        dotsWrap.innerHTML = '';
+        dots = [];
+        for (let i = 0; i < pages; i++) {
+          const btn = document.createElement('button');
+          btn.className = 'skills-dot' + (i === 0 ? ' active' : '');
+          btn.setAttribute('aria-label', `第 ${i + 1} 頁`);
+          btn.addEventListener('click', () => {
+            carousel.scrollTo({ left: i * cardStep(), behavior: 'smooth' });
+          });
+          dotsWrap.appendChild(btn);
+          dots.push(btn);
+        }
+      }
 
       prevBtn?.addEventListener('click', () => {
         carousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
@@ -6678,25 +6757,14 @@
         carousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
       });
 
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          // 點 dot i = 讓 card i 成為最右邊看到的卡片（與 updateState 對齊）
-          const step = cardStep();
-          const visibleCount = Math.max(1, Math.round(carousel.clientWidth / step));
-          const targetLeftmost = Math.max(0, i - visibleCount + 1);
-          carousel.scrollTo({ left: targetLeftmost * step, behavior: 'smooth' });
-        });
-      });
-
       let scrollTimer;
       const updateState = () => {
-        // active dot = 最右邊看到的卡片
-        //（桌面同時顯 3 張時起點是 dot 3、滑一次變 dot 4、終點 dot 5）
-        const step = cardStep();
-        const leftmostIdx = Math.round(carousel.scrollLeft / step);
-        const visibleCount = Math.max(1, Math.round(carousel.clientWidth / step));
-        const rightmostIdx = Math.min(leftmostIdx + visibleCount - 1, dots.length - 1);
-        dots.forEach((d, i) => d.classList.toggle('active', i === rightmostIdx));
+        // dot = 滑動「頁」index（0 = 起點，最大 = pageCount-1）
+        const pageIdx = Math.min(
+          Math.round(carousel.scrollLeft / cardStep()),
+          dots.length - 1
+        );
+        dots.forEach((d, i) => d.classList.toggle('active', i === pageIdx));
         if (prevBtn) prevBtn.classList.toggle('disabled', carousel.scrollLeft <= 4);
         if (nextBtn) nextBtn.classList.toggle('disabled',
           carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 4);
@@ -6705,7 +6773,16 @@
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(updateState, 60);
       }, { passive: true });
-      window.addEventListener('load', updateState);
+
+      // 視窗大小改變 → 重建 dots（visibleCount 可能變了）
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { buildDots(); updateState(); }, 150);
+      });
+      window.addEventListener('load', () => { buildDots(); updateState(); });
+      // 立刻初始一次，避免 load 前畫面空白
+      buildDots();
     })();
 
     // Learning Path Tabs 切換（共用函式）
