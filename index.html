@@ -6112,11 +6112,7 @@
 
       <!-- 手機分類 chips（桌面隱藏） -->
       <div class="faq-chips" role="tablist" aria-label="FAQ 分類">
-        <button class="faq-chip active" data-cat="all" role="tab" aria-selected="true">
-          <span class="faq-chip-icon">📖</span>
-          <span class="faq-chip-text">全部</span>
-        </button>
-        <button class="faq-chip" data-cat="content" role="tab" aria-selected="false">
+        <button class="faq-chip active" data-cat="content" role="tab" aria-selected="true">
           <span class="faq-chip-icon">📚</span>
           <span class="faq-chip-text">課程內容</span>
         </button>
@@ -6128,9 +6124,13 @@
           <span class="faq-chip-icon">🎯</span>
           <span class="faq-chip-text">學習效果</span>
         </button>
+        <button class="faq-chip" data-cat="all" role="tab" aria-selected="false">
+          <span class="faq-chip-icon">📖</span>
+          <span class="faq-chip-text">全部</span>
+        </button>
       </div>
 
-      <div class="faq-wrap" data-active="all">
+      <div class="faq-wrap" data-active="content">
 
         <div class="faq-item open" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
