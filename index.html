@@ -1331,28 +1331,35 @@
       gap: 14px;
       align-items: center;
     }
+    /* 未選中：每個 tab 有自己的淡色身分 */
+    .reason-tab-btn[data-color="o"] { background: #FFF8EF; border-color: rgba(255,163,0,0.32); }
+    .reason-tab-btn[data-color="r"] { background: #FFF1F1; border-color: rgba(255,88,89,0.32); }
+    .reason-tab-btn[data-color="t"] { background: #ECFAF8; border-color: rgba(0,196,179,0.32); }
     .reason-tab-btn:hover {
-      border-color: rgba(255,163,0,0.3);
       transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.05);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
     }
+    .reason-tab-btn[data-color="o"]:hover { border-color: var(--orange); }
+    .reason-tab-btn[data-color="r"]:hover { border-color: var(--red); }
+    .reason-tab-btn[data-color="t"]:hover { border-color: var(--teal); }
     .reason-tab-btn.active {
-      border-width: 2.5px;
+      border-width: 3px;
+      transform: translateY(-3px);
     }
     .reason-tab-btn[data-color="o"].active {
       border-color: var(--orange);
-      background: linear-gradient(180deg, #fff 0%, #FFF8EF 100%);
-      box-shadow: 0 18px 36px rgba(255,163,0,0.16);
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%);
+      box-shadow: 0 18px 36px rgba(255,163,0,0.22);
     }
     .reason-tab-btn[data-color="r"].active {
       border-color: var(--red);
-      background: linear-gradient(180deg, #fff 0%, #FFF5F5 100%);
-      box-shadow: 0 18px 36px rgba(255,88,89,0.16);
+      background: linear-gradient(135deg, #FFE5E5 0%, #FFCFCF 100%);
+      box-shadow: 0 18px 36px rgba(255,88,89,0.22);
     }
     .reason-tab-btn[data-color="t"].active {
       border-color: var(--teal);
-      background: linear-gradient(180deg, #fff 0%, #F0FCFA 100%);
-      box-shadow: 0 18px 36px rgba(0,196,179,0.16);
+      background: linear-gradient(135deg, #E0F8F5 0%, #C0F0EA 100%);
+      box-shadow: 0 18px 36px rgba(0,196,179,0.22);
     }
     .reason-tab-icon {
       width: 52px; height: 52px;
@@ -1363,10 +1370,16 @@
       font-size: 1.5rem;
       font-weight: 900;
       flex-shrink: 0;
+      transition: all 0.3s;
     }
-    .reason-tab-btn[data-color="o"] .reason-tab-icon { background: var(--orange-pale); color: var(--orange); }
-    .reason-tab-btn[data-color="r"] .reason-tab-icon { background: var(--red-pale); color: var(--red); }
-    .reason-tab-btn[data-color="t"] .reason-tab-icon { background: var(--teal-pale); color: var(--teal); }
+    /* tab icon：未選中時用淡色 + 同色字 */
+    .reason-tab-btn[data-color="o"] .reason-tab-icon { background: #fff; color: var(--orange); border: 2px solid rgba(255,163,0,0.4); }
+    .reason-tab-btn[data-color="r"] .reason-tab-icon { background: #fff; color: var(--red); border: 2px solid rgba(255,88,89,0.4); }
+    .reason-tab-btn[data-color="t"] .reason-tab-icon { background: #fff; color: var(--teal); border: 2px solid rgba(0,196,179,0.4); }
+    /* tab icon：選中時翻轉為實心色 + 白勾勾，跟 panel icon 區分 */
+    .reason-tab-btn[data-color="o"].active .reason-tab-icon { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .reason-tab-btn[data-color="r"].active .reason-tab-icon { background: var(--red); color: #fff; border-color: var(--red); }
+    .reason-tab-btn[data-color="t"].active .reason-tab-icon { background: var(--teal); color: #fff; border-color: var(--teal); }
 
     .reason-tab-meta {
       font-family: 'SF Mono', monospace;
@@ -1398,16 +1411,29 @@
       background: #fff;
       border-radius: 24px;
       padding: 40px 44px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
-      border: 1.5px solid #f0f0f0;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      border: 2px solid #f0f0f0;
     }
     .reason-panel-item.active {
       display: block;
       animation: panelIn 0.4s ease;
     }
-    .reason-panel-item[data-color="o"] { border-left: 6px solid var(--orange); }
-    .reason-panel-item[data-color="r"] { border-left: 6px solid var(--red); }
-    .reason-panel-item[data-color="t"] { border-left: 6px solid var(--teal); }
+    /* panel 底色：跟對應 tab 的 active 漸層完全一致 */
+    .reason-panel-item[data-color="o"] {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%);
+      border-color: var(--orange);
+      border-left: 6px solid var(--orange);
+    }
+    .reason-panel-item[data-color="r"] {
+      background: linear-gradient(135deg, #FFE5E5 0%, #FFCFCF 100%);
+      border-color: var(--red);
+      border-left: 6px solid var(--red);
+    }
+    .reason-panel-item[data-color="t"] {
+      background: linear-gradient(135deg, #E0F8F5 0%, #C0F0EA 100%);
+      border-color: var(--teal);
+      border-left: 6px solid var(--teal);
+    }
 
     .reason-panel-head {
       display: flex;
@@ -1424,20 +1450,23 @@
       font-size: 1.7rem;
       font-weight: 900;
       flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
-    .reason-panel-item[data-color="o"] .reason-panel-icon { background: var(--orange-pale); color: var(--orange); }
-    .reason-panel-item[data-color="r"] .reason-panel-icon { background: var(--red-pale); color: var(--red); }
-    .reason-panel-item[data-color="t"] .reason-panel-icon { background: var(--teal-pale); color: var(--teal); }
+    /* panel icon：用實心深色 + 白勾勾，跟 tab 形成「淡 → 深」漸進視覺層級 */
+    .reason-panel-item[data-color="o"] .reason-panel-icon { background: var(--orange-dark); color: #fff; }
+    .reason-panel-item[data-color="r"] .reason-panel-icon { background: #d94a4a; color: #fff; }
+    .reason-panel-item[data-color="t"] .reason-panel-icon { background: #00a594; color: #fff; }
     .reason-panel-meta {
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 1.5px;
       color: var(--gray);
       margin-bottom: 6px;
     }
+    /* meta：在 tinted bg 上用「深色 + 字距」確保識別度 */
     .reason-panel-item[data-color="o"] .reason-panel-meta { color: var(--orange-dark); }
-    .reason-panel-item[data-color="r"] .reason-panel-meta { color: var(--red); }
-    .reason-panel-item[data-color="t"] .reason-panel-meta { color: var(--teal); }
+    .reason-panel-item[data-color="r"] .reason-panel-meta { color: #c92e2f; }
+    .reason-panel-item[data-color="t"] .reason-panel-meta { color: #008678; }
     .reason-panel-title {
       font-size: 1.5rem;
       font-weight: 900;
@@ -1448,20 +1477,22 @@
     }
     .reason-panel-text {
       font-size: 1.05rem;
-      color: var(--gray);
+      color: var(--text);   /* tinted bg 上用主色文字（不再用淡灰） */
       line-height: 1.85;
       margin: 0 0 14px 0;
     }
     .reason-panel-text:last-child { margin-bottom: 0; }
+    /* strong：用白底 + 主色字（跟 tinted bg 形成清楚對比） */
     .reason-panel-text strong {
-      color: var(--text);
-      font-weight: 700;
-      background: var(--orange-pale);
-      padding: 1px 8px;
-      border-radius: 4px;
+      color: var(--orange-dark);
+      font-weight: 800;
+      background: rgba(255,255,255,0.78);
+      padding: 1px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .reason-panel-item[data-color="r"] .reason-panel-text strong { background: var(--red-pale); }
-    .reason-panel-item[data-color="t"] .reason-panel-text strong { background: var(--teal-pale); }
+    .reason-panel-item[data-color="r"] .reason-panel-text strong { color: #c92e2f; background: rgba(255,255,255,0.82); }
+    .reason-panel-item[data-color="t"] .reason-panel-text strong { color: #008678; background: rgba(255,255,255,0.82); }
 
     @media (max-width: 768px) {
       .reasons-tabs {
@@ -6009,19 +6040,53 @@
       window.addEventListener('load', () => setTimeout(initTypewriter, 200));
     }
 
-    // Reasons Tabs 切換
+    // Reasons Tabs 切換（共用函式）
+    function activateReasonTab(btn, scrollIntoView) {
+      if (!btn || btn.classList.contains('active')) return;
+      const target = btn.dataset.target;
+      document.querySelectorAll('.reason-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.reason-panel-item').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById(target);
+      if (panel) panel.classList.add('active');
+      if (scrollIntoView && window.innerWidth < 768) {
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+    // 桌面 hover 觸發切換、點擊也保留（觸控裝置 fallback）
     document.querySelectorAll('.reason-tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.target;
-        document.querySelectorAll('.reason-tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.reason-panel-item').forEach(p => p.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
-        if (window.innerWidth < 768) {
-          btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-      });
+      // 只在能 hover 的裝置（桌面滑鼠）才用 mouseenter，避免手機誤觸
+      const isHoverDevice = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (isHoverDevice) {
+        btn.addEventListener('mouseenter', () => activateReasonTab(btn, false));
+      }
+      btn.addEventListener('click', () => activateReasonTab(btn, true));
     });
+
+    // 手機橫向滑動 reasons-tabs → 自動切換 panel
+    (function() {
+      const tabsWrap = document.querySelector('.reasons-tabs');
+      if (!tabsWrap) return;
+      let scrollTimer = null;
+      tabsWrap.addEventListener('scroll', () => {
+        if (window.innerWidth >= 768) return;
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const wrapRect = tabsWrap.getBoundingClientRect();
+          const wrapCenter = wrapRect.left + wrapRect.width / 2;
+          let closest = null, minDist = Infinity;
+          tabsWrap.querySelectorAll('.reason-tab-btn').forEach(tab => {
+            const r = tab.getBoundingClientRect();
+            const c = r.left + r.width / 2;
+            const d = Math.abs(c - wrapCenter);
+            if (d < minDist) { minDist = d; closest = tab; }
+          });
+          if (closest && !closest.classList.contains('active')) {
+            activateReasonTab(closest, false);
+          }
+        }, 90);
+      }, { passive: true });
+    })();
 
     // Skills Carousel
     (function () {
