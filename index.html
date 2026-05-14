@@ -1812,7 +1812,45 @@
       box-shadow: 0 18px 44px rgba(0,0,0,0.32);
     }
 
-    @media (max-width: 768px) { .trust-grid { grid-template-columns: 1fr; } }
+    /* 手機：trust-grid 改橫向滑動 */
+    @media (max-width: 768px) {
+      .trust-grid {
+        display: flex;
+        grid-template-columns: none;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 32px -20px 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .trust-grid::-webkit-scrollbar { display: none; }
+      .trust-card {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
+        min-width: 0;
+      }
+      /* dot 指示器 */
+      .trust-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .trust-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.4);
+        transition: all 0.25s;
+      }
+      .trust-dots .dot.active {
+        background: #fff;
+        width: 22px;
+        border-radius: 4px;
+      }
+    }
+    .trust-dots { display: none; }   /* 桌面隱藏 */
 
     /* 課程獨家亮點（trust 區下半段） */
     .highlight-divider {
@@ -1917,7 +1955,44 @@
       line-height: 1.65;
       margin: 0;
     }
-    @media (max-width: 768px) { .highlight-grid { grid-template-columns: 1fr; } }
+    /* 手機：highlight-grid 改橫向滑動 */
+    @media (max-width: 768px) {
+      .highlight-grid {
+        display: flex;
+        grid-template-columns: none;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 0 -20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .highlight-grid::-webkit-scrollbar { display: none; }
+      .highlight-card {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
+        min-width: 0;
+      }
+      .highlight-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .highlight-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.35);
+        transition: all 0.25s;
+      }
+      .highlight-dots .dot.active {
+        background: #fff;
+        width: 22px;
+        border-radius: 4px;
+      }
+    }
+    .highlight-dots { display: none; }
 
     /* ══════════════════════════════════════
        Section 3.5：教學品質承諾（線上學習可行性）
@@ -1956,15 +2031,22 @@
       position: absolute;
       top: -14px; left: 50%;
       transform: translateX(-50%);
-      background: var(--orange);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      padding: 6px 16px;
+      background: #fff;
+      color: var(--orange-dark);
+      font-size: 0.86rem;
+      font-weight: 500;  /* 改非粗體（中文筆劃多時粗體會糊在一起） */
+      letter-spacing: 0.4px;
+      padding: 6px 18px;
       border-radius: 999px;
       white-space: nowrap;
+      border: 2px solid var(--orange);
       box-shadow: 0 6px 16px rgba(255,163,0,0.32);
+    }
+    .quality-feature-tag::before {
+      content: '★';
+      color: var(--orange);
+      margin-right: 4px;
+      font-size: 0.9rem;
     }
     .quality-icon {
       width: 72px;
@@ -2027,13 +2109,48 @@
 
     @media (max-width: 991px) {
       .quality-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
-      .quality-feature-tag { font-size: 0.72rem; padding: 5px 12px; }
+      .quality-feature-tag { padding: 5px 14px; }
     }
-    @media (max-width: 575px) {
-      .quality-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
-      .quality-card { padding: 26px 20px 22px; }
+    /* 手機：quality-grid 改橫向滑動 */
+    @media (max-width: 768px) {
+      .quality-grid {
+        display: flex;
+        grid-template-columns: none;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 22px 20px 16px;  /* top 留空間給 feature-tag */
+        margin: 32px -20px 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .quality-grid::-webkit-scrollbar { display: none; }
+      .quality-card {
+        flex: 0 0 78%;
+        scroll-snap-align: center;
+        min-width: 0;
+        padding: 26px 20px 22px;
+      }
       .quality-promise { font-size: 0.92rem; padding: 14px 22px; flex-wrap: wrap; }
+      .quality-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .quality-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,163,0,0.32);
+        transition: all 0.25s;
+      }
+      .quality-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
+      }
     }
+    .quality-dots { display: none; }
 
     /* ══════════════════════════════════════
        Section 4：三大關鍵能力
@@ -4961,6 +5078,7 @@
           <div class="trust-sub">累積多年的兒童程式教育信任，是台灣最早的程式學苑之一</div>
         </div>
       </div>
+      <div class="trust-dots" aria-hidden="true"></div>
 
       <!-- 課程獨家亮點 -->
       <div class="highlight-divider" data-aos="fade-up" data-aos-delay="180">★ 為這堂課特別設計 ★</div>
@@ -5035,6 +5153,7 @@
           <p class="highlight-desc">課程錄影提供補課與課後複習，缺課不用擔心，學習不斷線</p>
         </div>
       </div>
+      <div class="highlight-dots" aria-hidden="true"></div>
 
       <div class="trust-cta" data-aos="fade-up" data-aos-delay="280">
         <a href="https://orangeapple.co/free-trial" class="btn-trust-cta" target="_blank" rel="noopener">
@@ -5088,7 +5207,7 @@
 
         <!-- 卡 2：固定老師 -->
         <div class="quality-card quality-card-feature">
-          <div class="quality-feature-tag">★ 線上課關鍵</div>
+          <div class="quality-feature-tag">線上課關鍵</div>
           <div class="quality-icon">
             <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
               <!-- 日曆 -->
@@ -5138,6 +5257,7 @@
           <p class="quality-desc">定期教學共備、教研會議，教學品質持續可控</p>
         </div>
       </div>
+      <div class="quality-dots" aria-hidden="true"></div>
 
       <p class="quality-promise" data-aos="fade-up" data-aos-delay="200">
         <span class="quality-promise-icon">✓</span>
@@ -6149,6 +6269,46 @@
     if (document.querySelector('.hero-demo')) {
       window.addEventListener('load', () => setTimeout(initTypewriter, 200));
     }
+
+    // 手機橫向 carousel + dot 指示器（trust / highlight / quality 共用）
+    (function() {
+      function initCarousel(gridSel, dotsSel, cardSel) {
+        const grid = document.querySelector(gridSel);
+        const dotsWrap = document.querySelector(dotsSel);
+        if (!grid || !dotsWrap) return;
+        const cards = grid.querySelectorAll(cardSel);
+        if (!cards.length) return;
+        // 生成 dots
+        dotsWrap.innerHTML = '';
+        cards.forEach((_, i) => {
+          const d = document.createElement('span');
+          d.className = 'dot' + (i === 0 ? ' active' : '');
+          dotsWrap.appendChild(d);
+        });
+        let scrollTimer = null;
+        grid.addEventListener('scroll', () => {
+          if (window.innerWidth >= 768) return;
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => {
+            const wrapRect = grid.getBoundingClientRect();
+            const center = wrapRect.left + wrapRect.width / 2;
+            let closest = 0, minDist = Infinity;
+            cards.forEach((c, i) => {
+              const r = c.getBoundingClientRect();
+              const cc = r.left + r.width / 2;
+              const d = Math.abs(cc - center);
+              if (d < minDist) { minDist = d; closest = i; }
+            });
+            dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
+              d.classList.toggle('active', i === closest);
+            });
+          }, 80);
+        }, { passive: true });
+      }
+      initCarousel('.trust-grid', '.trust-dots', '.trust-card');
+      initCarousel('.highlight-grid', '.highlight-dots', '.highlight-card');
+      initCarousel('.quality-grid', '.quality-dots', '.quality-card');
+    })();
 
     // Info-table 分組 Tabs（手機分類切換）
     (function() {
