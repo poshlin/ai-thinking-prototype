@@ -326,24 +326,24 @@
     }
 
     .btn-nav-cta {
-      background: var(--orange);
+      background: var(--red);
       color: #fff !important;
       border: none;
-      border-radius: 50px;
+      border-radius: 14px;
       padding: 10px 22px;
       font-weight: 700;
       font-size: 0.88rem;
       text-decoration: none;
       transition: all 0.25s;
-      box-shadow: 0 4px 14px rgba(255,163,0,0.3);
+      box-shadow: 0 4px 14px rgba(255,88,89,0.3);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
     .btn-nav-cta:hover {
-      background: var(--orange-dark);
+      background: #ff4548;
       transform: translateY(-1px);
-      box-shadow: 0 8px 22px rgba(255,163,0,0.45);
+      box-shadow: 0 8px 22px rgba(255,88,89,0.45);
     }
 
     .btn-nav-login {
@@ -463,15 +463,16 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--red);
-      color: #fff;
+      background: var(--orange-pale);
+      color: var(--orange-dark);
       font-size: 0.92rem;
-      font-weight: 700;
+      font-weight: 800;
       padding: 9px 20px;
       border-radius: 50px;
       letter-spacing: 0.3px;
       margin-bottom: 20px;
-      box-shadow: 0 10px 28px rgba(255,88,89,0.32);
+      border: 1.5px solid rgba(255,163,0,0.35);
+      box-shadow: 0 6px 20px rgba(255,163,0,0.18);
     }
     .hero-eyebrow-icon {
       font-size: 1rem;
@@ -905,7 +906,7 @@
       padding: 16px 0 12px;
       opacity: 0;
       transform: translateY(-10px);
-      animation: arrowIn 0.6s cubic-bezier(0.16,1,0.3,1) 3.2s forwards;
+      animation: arrowIn 0.6s cubic-bezier(0.16,1,0.3,1) 1.4s forwards;
     }
     @keyframes arrowIn {
       to { opacity: 1; transform: translateY(0); }
@@ -960,7 +961,7 @@
       margin-top: 8px;
       opacity: 0;
       transform: scale(0.8);
-      animation: resultIn 0.8s cubic-bezier(0.16,1,0.3,1) 3.7s forwards;
+      animation: resultIn 0.8s cubic-bezier(0.16,1,0.3,1) 1.6s forwards;
     }
     @keyframes resultIn {
       to { opacity: 1; transform: scale(1); }
@@ -995,7 +996,7 @@
       box-shadow: 0 16px 32px rgba(255,163,0,0.42);
       z-index: 2;
       opacity: 0;
-      animation: tagIn 0.5s ease 4.3s forwards;
+      animation: tagIn 0.5s ease 1.95s forwards;
     }
     @keyframes tagIn {
       from { opacity: 0; transform: translateX(-50%) scale(0.8); }
@@ -1012,7 +1013,7 @@
       box-shadow: 0 14px 32px rgba(0,0,0,0.12);
       opacity: 0;
       transform: translateY(20px);
-      animation: stickersIn 0.6s ease 4.8s forwards;
+      animation: stickersIn 0.6s ease 2.4s forwards;
       position: relative;
     }
     @keyframes stickersIn {
@@ -1059,55 +1060,8 @@
        強反差過場：微弱漸層融合帶
        在進入色塊大反差的 sec 上方做 40px 柔化
     ══════════════════════════════════════ */
-    .sec-trust::before,
-    .sec-skills::before,
-    .sec-vs-surface::before,
-    .sec-flow::before,
-    .sec-video::before,
-    .sec-vs-camp::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 40px;
-      z-index: 1;
-      pointer-events: none;
-    }
-    /* sec-faq 結尾 → footer-cta 橘色（用 ::after 因為 footer-cta 已佔 ::before/::after） */
-    .sec-faq::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 40px;
-      background: linear-gradient(180deg, transparent, #ff8a00);
-      opacity: 0.85;
-      z-index: 1;
-      pointer-events: none;
-    }
-    /* sec-overview 米白 → sec-trust 橘 */
-    .sec-trust::before {
-      background: linear-gradient(180deg, #FFFAF2, transparent);
-    }
-    /* sec-trust 橘 → sec-skills 淡灰 */
-    .sec-skills::before {
-      background: linear-gradient(180deg, #ff8a00, transparent);
-      opacity: 0.85;
-    }
-    /* sec-skills 淡灰 → sec-vs-surface 深 */
-    .sec-vs-surface::before {
-      background: linear-gradient(180deg, #FAFAFA, transparent);
-    }
-    /* sec-vs-surface 深 → sec-flow 白（從深色淡入白） */
-    .sec-flow::before {
-      background: linear-gradient(180deg, rgba(26,15,0,0.85), transparent);
-    }
-    /* sec-curriculum 結尾白 → sec-video 深 */
-    .sec-video::before {
-      background: linear-gradient(180deg, #fff, transparent);
-    }
-    /* sec-video 深 → sec-vs-camp 白漸層 */
-    .sec-vs-camp::before {
-      background: linear-gradient(180deg, rgba(26,15,0,0.85), transparent);
-    }
+    /* 過場漸層帶已移除（依設計師回饋：120px section padding 已足以區隔，
+       漸層帶反而暴露區段拼接痕跡） */
     /* 保證 container 內容在融合帶上方 */
     .sec > .container { position: relative; z-index: 2; }
 
@@ -1724,7 +1678,7 @@
       background: #fff;
       color: var(--orange-dark);
       border: none;
-      border-radius: 50px;
+      border-radius: 14px;
       padding: 17px 42px;
       font-size: 1rem;
       font-weight: 700;
@@ -1846,6 +1800,122 @@
     @media (max-width: 768px) { .highlight-grid { grid-template-columns: 1fr; } }
 
     /* ══════════════════════════════════════
+       Section 3.5：教學品質承諾（線上學習可行性）
+    ══════════════════════════════════════ */
+    .sec-quality {
+      background: linear-gradient(180deg, #fffbf5 0%, #ffffff 100%);
+      position: relative;
+    }
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .quality-card {
+      background: #fff;
+      border: 1.5px solid #f1ece2;
+      border-radius: 24px;
+      padding: 32px 24px 28px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s;
+      box-shadow: 0 6px 22px rgba(255,163,0,0.06);
+    }
+    .quality-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--orange);
+      box-shadow: 0 16px 38px rgba(255,163,0,0.18);
+    }
+    .quality-card-feature {
+      background: linear-gradient(140deg, #fffaf2 0%, #fff 60%);
+      border-color: var(--orange);
+      box-shadow: 0 12px 32px rgba(255,163,0,0.18);
+    }
+    .quality-feature-tag {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 6px 16px rgba(255,163,0,0.32);
+    }
+    .quality-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      background: var(--orange-pale);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quality-num {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--orange-dark);
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .quality-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .quality-desc {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .quality-promise {
+      max-width: 620px;
+      margin: 48px auto 0;
+      padding: 18px 32px;
+      background: #fff;
+      border: 2px dashed var(--orange);
+      border-radius: 999px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .quality-promise-icon {
+      width: 28px; height: 28px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 991px) {
+      .quality-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .quality-feature-tag { font-size: 0.72rem; padding: 5px 12px; }
+    }
+    @media (max-width: 575px) {
+      .quality-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+      .quality-card { padding: 26px 20px 22px; }
+      .quality-promise { font-size: 0.92rem; padding: 14px 22px; flex-wrap: wrap; }
+    }
+
+    /* ══════════════════════════════════════
        Section 4：三大關鍵能力
     ══════════════════════════════════════ */
     .sec-skills { background: var(--bg-light); }
@@ -1873,16 +1943,16 @@
     }
     .skill-card.featured:hover { transform: translateY(-26px); }
     .skill-card.featured::before {
-      content: '★ 最關鍵';
+      content: '◆ 最關鍵';
       position: absolute;
       top: -16px; left: 24px;
-      background: var(--red);
+      background: var(--orange);
       color: #fff;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
       padding: 6px 14px;
-      border-radius: 50px;
-      box-shadow: 0 6px 18px rgba(255,88,89,0.4);
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(255,163,0,0.4);
       letter-spacing: 0.5px;
     }
 
@@ -1914,10 +1984,12 @@
       scroll-snap-align: start;
       margin: 0;
     }
-    /* Carousel 內取消 featured 浮起（5 張並排時會破壞對齊） */
+    /* Carousel 內 featured 用「邊框 + 背景」差異化（不靠 translate，避免對齊跑掉） */
     .skills-carousel .skill-card.featured {
       transform: none;
-      box-shadow: 0 24px 56px rgba(255,163,0,0.22);
+      border-width: 3px;
+      background: linear-gradient(140deg, #fffaf2 0%, #fff 60%);
+      box-shadow: 0 18px 48px rgba(255,163,0,0.26);
     }
     .skills-carousel .skill-card.featured:hover {
       transform: translateY(-8px);
@@ -3629,7 +3701,7 @@
       background: #fff;
       color: var(--orange-dark);
       border: none;
-      border-radius: 50px;
+      border-radius: 14px;
       padding: 20px 50px;
       font-size: 1.08rem;
       font-weight: 700;
@@ -3644,13 +3716,22 @@
       position: absolute;
       inset: -8px;
       border: 2.5px dashed rgba(255,255,255,0.6);
-      border-radius: 50px;
-      animation: spin 18s linear infinite;
+      border-radius: 18px;
+      transition: transform 18s linear;
     }
     .btn-footer:hover {
       transform: translateY(-3px);
       box-shadow: 0 22px 52px rgba(0,0,0,0.34);
       color: var(--orange-dark);
+    }
+    .btn-footer:hover::before {
+      transform: rotate(360deg);
+    }
+    .footer-cta-sub {
+      margin: 24px auto 0 !important;
+      font-size: 0.92rem !important;
+      color: rgba(255,255,255,0.85) !important;
+      max-width: 580px;
     }
 
     /* ══════════════════════════════════════
@@ -4090,6 +4171,50 @@
       .footer-cta h2 { font-size: 1.55rem; }
       .vs-summary { font-size: 0.95rem; line-height: 1.8; }
     }
+
+    /* ══════════════════════════════════════
+       手機底部 sticky CTA 條（< 768px 才顯示）
+    ══════════════════════════════════════ */
+    .mobile-sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.12);
+      border-top: 1.5px solid rgba(255,163,0,0.18);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mobile-sticky-cta.visible { transform: translateY(0); }
+    .mobile-sticky-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 14px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(255,88,89,0.35);
+      letter-spacing: 0.3px;
+    }
+    .mobile-sticky-btn:hover, .mobile-sticky-btn:focus {
+      background: #ff4548;
+      color: #fff;
+    }
+    @media (max-width: 768px) {
+      .mobile-sticky-cta { display: block; }
+      /* 預留底部空間，避免 sticky 條遮住內容 */
+      body { padding-bottom: 76px; }
+    }
   </style>
 </head>
 
@@ -4157,8 +4282,8 @@
       </ul>
 
       <div class="oa-nav-right">
-        <a href="https://orangeapple.co/free-trial" class="btn-nav-cta">
-          取得免費試聽
+        <a href="https://orangeapple.co/free-trial" class="btn-nav-cta" target="_blank" rel="noopener">
+          預約課程介紹
         </a>
         <a href="https://orangeapple.co/users/sign_in" class="btn-nav-login">家長／學員登入</a>
         <button class="nav-burger" id="navBurger" aria-label="選單">
@@ -4183,7 +4308,7 @@
       <a href="https://orangeapple.co/about">關於我們</a>
       <a href="https://orangeapple.co/faq">常見問題</a>
       <a href="https://orangeapple.co/users/sign_in">家長／學員登入</a>
-      <a href="https://orangeapple.co/free-trial" style="background: var(--orange); color: #fff; margin: 12px 32px 8px; padding: 14px 24px; border-radius: 50px; text-align: center; font-weight: 700; border: none;">✨ 取得免費試聽</a>
+      <a href="https://orangeapple.co/free-trial" target="_blank" rel="noopener" style="background: var(--orange); color: #fff; margin: 12px 32px 8px; padding: 14px 24px; border-radius: 50px; text-align: center; font-weight: 700; border: none;">✨ 預約課程介紹</a>
     </div>
   </nav>
 
@@ -4215,13 +4340,14 @@
             </span>
           </div>
           <h1 class="hero-title" data-aos="fade-up" data-aos-delay="80">
-            不只是玩 AI，<br>
-            是培養解決問題的<br>
-            <span class="accent">「超級大腦」</span>
+            不要讓孩子把 AI<br>
+            當成<span style="color:var(--gray);font-weight:700;">答案機</span>，<br>
+            而是學會把 AI<br>
+            當成<span class="accent">解決問題的夥伴</span>
           </h1>
           <p class="hero-desc" data-aos="fade-up" data-aos-delay="160">
-            15 堂實戰課，掌握 Prompt Engineering 指令工程，
-            教導孩子與 AI 深度溝通，將創意轉化為看得見的作品。
+            15 堂實戰課，從 Prompt Engineering 到專案實作，
+            教孩子用 AI 把想法變成看得見的作品。
           </p>
 
           <div class="hero-info-grid" data-aos="fade-up" data-aos-delay="220">
@@ -4255,11 +4381,11 @@
           </div>
 
           <div class="hero-cta" data-aos="fade-up" data-aos-delay="300">
-            <a href="#curriculum" class="btn-hero-primary">
-              查看完整大綱
+            <a href="https://orangeapple.co/free-trial" class="btn-hero-primary" target="_blank" rel="noopener">
+              預約 1 對 1 課程介紹
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="#syllabus" class="btn-hero-ghost">看 15 個驚人成就</a>
+            <a href="#video" class="btn-hero-ghost">先看 60 秒影片</a>
           </div>
         </div>
 
@@ -4332,8 +4458,8 @@
         <div class="trust-bar-item">
           <svg class="trust-bar-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
           <div>
-            <div class="trust-bar-num">業界領先</div>
-            <div class="trust-bar-lbl">國際認證輔導實績</div>
+            <div class="trust-bar-num">ITS 認證</div>
+            <div class="trust-bar-lbl">國際認證合作學校</div>
           </div>
         </div>
         <div class="trust-bar-divider"></div>
@@ -4542,6 +4668,26 @@
         <div class="info-row">
           <div class="info-label">
             <span class="info-label-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            班級人數
+          </div>
+          <div class="info-value">小班制 <strong>1 : 10</strong>（每位老師最多帶 10 位學生）</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">
+            <span class="info-label-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 0 1 .665 6.479A11.952 11.952 0 0 0 12 20.055a11.952 11.952 0 0 0-6.824-2.998 12.078 12.078 0 0 1 .665-6.479L12 14z"/></svg>
+            </span>
+            師資制度
+          </div>
+          <div class="info-value"><strong>固定老師制</strong>（整學期由同一位老師授課，臨時狀況另行安排代課），所有老師皆通過教學部評核</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">
+            <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
             </span>
             主要成果
@@ -4569,6 +4715,45 @@
           <div class="info-value">需自備 <strong>筆電</strong>　／　不可使用平板或平板加鍵盤</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ══ Section 2.5：影片 Demo（前移）══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="sec sec-video" id="video">
+
+    <!-- 背景光暈 -->
+    <div class="deco" style="top:-100px;right:-100px;width:320px;height:320px;background:rgba(255,163,0,0.18);border-radius:50%;filter:blur(40px);"></div>
+    <div class="deco" style="bottom:-80px;left:-80px;width:240px;height:240px;background:rgba(0,196,179,0.12);border-radius:50%;filter:blur(30px);"></div>
+
+    <!-- 裝飾 -->
+    <svg class="deco anim-1" style="top:80px;left:8%;" data-parallax="0.4" width="32" height="32" viewBox="0 0 24 24" fill="#FFA300" opacity="0.6"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
+    <svg class="deco anim-spin" style="top:120px;right:10%;" data-parallax="0.3" width="28" height="28" viewBox="0 0 24 24" fill="#FFA300" opacity="0.5"><circle cx="12" cy="12" r="10"/></svg>
+    <svg class="deco anim-3" style="bottom:60px;left:14%;" data-parallax="0.5" width="40" height="40" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.5"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z"/></svg>
+
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <span class="sec-eyebrow"><span class="sec-eyebrow-dot"></span>實作範例</span>
+        <h2 class="sec-heading">
+          <span class="sec-heading-en">VIDEO DEMO</span>
+          看一段<span class="accent-o">孩子能做出什麼</span>
+        </h2>
+        <p class="sec-desc mx-auto">課程實作範例：透過 AI 讓靜態圖片動起來，<br>從一張圖到一段影片只需幾個提示詞。</p>
+      </div>
+      <a href="https://www.youtube.com/watch?v=irlNGTb-ypc" target="_blank" rel="noopener" class="video-frame video-link" data-aos="fade-up" data-aos-delay="100" aria-label="在 YouTube 觀看 AI 思維課程介紹">
+        <img src="https://img.youtube.com/vi/irlNGTb-ypc/maxresdefault.jpg"
+             alt="AI 思維課程介紹"
+             onerror="this.src='https://img.youtube.com/vi/irlNGTb-ypc/hqdefault.jpg';"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:22px;">
+        <div class="video-play">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          在 YouTube 觀看完整課程介紹
+        </div>
+      </a>
     </div>
   </section>
 
@@ -4614,9 +4799,9 @@
         </div>
         <div class="trust-card">
           <svg class="trust-card-deco anim-bobble" style="animation-delay:0.5s;" width="28" height="28" viewBox="0 0 24 24" fill="#FF5859"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z"/></svg>
-          <div class="trust-num">業界領先</div>
-          <div class="trust-lbl">國際認證輔導實績</div>
-          <div class="trust-sub">ITS 國際認證合作學校｜考照輔導通過率業界領先</div>
+          <div class="trust-num">ITS 認證</div>
+          <div class="trust-lbl">國際認證合作學校</div>
+          <div class="trust-sub">與 Certiport 合作的 ITS 國際認證輔導學校，學員可考取國際標準證照</div>
         </div>
         <div class="trust-card">
           <svg class="trust-card-deco anim-spin" width="28" height="28" viewBox="0 0 24 24" fill="#00C4B3"><circle cx="12" cy="12" r="10"/></svg>
@@ -4630,24 +4815,34 @@
       <div class="highlight-divider" data-aos="fade-up" data-aos-delay="180">★ 為這堂課特別設計 ★</div>
 
       <div class="highlight-grid" data-aos="fade-up" data-aos-delay="220">
-        <!-- 2026 全新推出：閃電 + 星星裝飾 -->
+        <!-- 全國競賽實績：獎盃 + 星星裝飾 -->
         <div class="highlight-card">
           <div class="highlight-icon">
-            <svg class="highlight-icon-lightning" width="40" height="40" viewBox="0 0 24 24">
+            <svg width="48" height="48" viewBox="0 0 40 40">
               <defs>
-                <linearGradient id="lightning-grad" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="trophy-grad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stop-color="#FFA300"/>
-                  <stop offset="100%" stop-color="#FF5859"/>
+                  <stop offset="100%" stop-color="#e8920a"/>
                 </linearGradient>
               </defs>
-              <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightning-grad)" stroke="#e8920a" stroke-width="0.5" stroke-linejoin="round"/>
+              <!-- 獎盃本體 -->
+              <path d="M14 6 L26 6 L26 16 Q26 22 20 24 Q14 22 14 16 Z" fill="url(#trophy-grad)" stroke="#c97a08" stroke-width="0.8" stroke-linejoin="round"/>
+              <!-- 獎盃手把 -->
+              <path d="M26 8 Q32 8 32 14 Q32 18 28 19" fill="none" stroke="#e8920a" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M14 8 Q8 8 8 14 Q8 18 12 19" fill="none" stroke="#e8920a" stroke-width="1.6" stroke-linecap="round"/>
+              <!-- 獎盃柱 -->
+              <rect x="18" y="24" width="4" height="6" fill="#e8920a"/>
+              <!-- 底座 -->
+              <rect x="14" y="30" width="12" height="3" rx="1" fill="#c97a08"/>
+              <!-- 獎盃上星星 -->
+              <path d="M20 12 L21.18 14.39 L23.81 14.74 L21.9 16.6 L22.36 19.2 L20 17.97 L17.64 19.2 L18.1 16.6 L16.19 14.74 L18.82 14.39 Z" fill="#fff"/>
             </svg>
             <svg class="highlight-icon-deco s1" width="14" height="14" viewBox="0 0 24 24" fill="#FFA300"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
             <svg class="highlight-icon-deco s2" width="10" height="10" viewBox="0 0 24 24" fill="#FF5859"><circle cx="12" cy="12" r="10"/></svg>
             <svg class="highlight-icon-deco s3" width="12" height="12" viewBox="0 0 24 24" fill="#FFA300"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
           </div>
-          <div class="highlight-title">2026 全新推出</div>
-          <p class="highlight-desc">橘子蘋果全新研發的 AI 課程，專為 5 年級以上學生設計</p>
+          <div class="highlight-title">全國競賽實績</div>
+          <p class="highlight-desc">學員在教育部級程式競賽常獲獎，從校內賽、縣市賽到全國賽（含貓咪盃等）皆有實績</p>
         </div>
 
         <!-- 不綁定單一工具：兩個齒輪轉動 -->
@@ -4691,11 +4886,112 @@
       </div>
 
       <div class="trust-cta" data-aos="fade-up" data-aos-delay="280">
-        <a href="#cta" class="btn-trust-cta">
-          預約免費試聽
+        <a href="https://orangeapple.co/free-trial" class="btn-trust-cta" target="_blank" rel="noopener">
+          預約專人課程介紹
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- ══ Section 3.5：教學品質承諾（線上學習可行性） ══ -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="sec sec-quality">
+    <!-- 背景裝飾 -->
+    <svg class="deco anim-1" style="top:80px;left:6%;" data-parallax="0.3" width="36" height="36" viewBox="0 0 24 24" fill="#FFA300" opacity="0.16"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
+    <svg class="deco anim-3" style="bottom:80px;right:6%;" data-parallax="0.4" width="48" height="48" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.12"><circle cx="12" cy="12" r="10"/></svg>
+
+    <div class="container">
+      <div class="text-center" data-aos="fade-up">
+        <span class="sec-eyebrow"><span class="sec-eyebrow-dot"></span>教學品質</span>
+        <h2 class="sec-heading">
+          <span class="sec-heading-en">ONLINE LEARNING THAT WORKS</span>
+          為什麼線上課，<br>
+          也能<span class="accent-o">學得好</span>？
+        </h2>
+        <p class="sec-desc mx-auto">線上課最常被質疑的是「老師顧得到嗎」「孩子會不會放空」。<br>下面是橘蘋對線上教學品質的 4 個承諾。</p>
+      </div>
+
+      <div class="quality-grid" data-aos="fade-up" data-aos-delay="100">
+        <!-- 卡 1：1:10 小班 -->
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+              <!-- 老師 -->
+              <circle cx="24" cy="14" r="6" fill="#FFA300"/>
+              <path d="M14 32 Q14 24 24 24 Q34 24 34 32" fill="#FFA300"/>
+              <!-- 學生小頭（10 顆） -->
+              <circle cx="8" cy="40" r="3" fill="#FF5859"/>
+              <circle cx="14" cy="40" r="3" fill="#FF5859"/>
+              <circle cx="20" cy="40" r="3" fill="#FF5859"/>
+              <circle cx="26" cy="40" r="3" fill="#FF5859"/>
+              <circle cx="32" cy="40" r="3" fill="#FF5859"/>
+              <circle cx="38" cy="40" r="3" fill="#FF5859"/>
+            </svg>
+          </div>
+          <div class="quality-num">1 : 10</div>
+          <div class="quality-title">小班制</div>
+          <p class="quality-desc">每位老師最多帶 10 個孩子，發問即時、進度跟得緊</p>
+        </div>
+
+        <!-- 卡 2：固定老師 -->
+        <div class="quality-card quality-card-feature">
+          <div class="quality-feature-tag">★ 線上課關鍵</div>
+          <div class="quality-icon">
+            <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+              <!-- 日曆 -->
+              <rect x="6" y="10" width="36" height="32" rx="3" fill="#FFA300" stroke="#e8920a" stroke-width="1"/>
+              <rect x="6" y="10" width="36" height="9" rx="3" fill="#e8920a"/>
+              <line x1="14" y1="6" x2="14" y2="14" stroke="#e8920a" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="34" y1="6" x2="34" y2="14" stroke="#e8920a" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- 中央人像 -->
+              <circle cx="24" cy="28" r="4" fill="#fff"/>
+              <path d="M18 38 Q18 33 24 33 Q30 33 30 38" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="quality-num">固定老師</div>
+          <div class="quality-title">整學期同一位</div>
+          <p class="quality-desc">不換老師（除臨時狀況外），孩子的學習節奏被持續了解</p>
+        </div>
+
+        <!-- 卡 3：嚴格篩選 -->
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+              <!-- 盾牌 -->
+              <path d="M24 4 L40 10 L40 24 Q40 36 24 44 Q8 36 8 24 L8 10 Z" fill="#00C4B3" stroke="#00a594" stroke-width="1"/>
+              <!-- 勾勾 -->
+              <path d="M16 24 L22 30 L34 18" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="quality-num">嚴格篩選</div>
+          <div class="quality-title">通過教學部評核</div>
+          <p class="quality-desc">每位老師都需通過橘蘋教學部的評核機制才能授課</p>
+        </div>
+
+        <!-- 卡 4：內訓制度 -->
+        <div class="quality-card">
+          <div class="quality-icon">
+            <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+              <!-- 書本 -->
+              <path d="M6 10 L24 14 L42 10 L42 38 L24 42 L6 38 Z" fill="#FFA300" stroke="#e8920a" stroke-width="1" stroke-linejoin="round"/>
+              <line x1="24" y1="14" x2="24" y2="42" stroke="#e8920a" stroke-width="1.5"/>
+              <!-- 齒輪 -->
+              <circle cx="36" cy="34" r="6" fill="#FF5859"/>
+              <circle cx="36" cy="34" r="2" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="quality-num">內訓制度</div>
+          <div class="quality-title">教學共備</div>
+          <p class="quality-desc">定期教學共備、教研會議，教學品質持續可控</p>
+        </div>
+      </div>
+
+      <p class="quality-promise" data-aos="fade-up" data-aos-delay="200">
+        <span class="quality-promise-icon">✓</span>
+        上完每堂課後，老師會給每位孩子個別回饋
+      </p>
     </div>
   </section>
 
@@ -5168,45 +5464,6 @@
   </section>
 
   <!-- ══════════════════════════════════════ -->
-  <!-- ══ Section 7：影片區 ══ -->
-  <!-- ══════════════════════════════════════ -->
-  <section class="sec sec-video">
-
-    <!-- 背景光暈 -->
-    <div class="deco" style="top:-100px;right:-100px;width:320px;height:320px;background:rgba(255,163,0,0.18);border-radius:50%;filter:blur(40px);"></div>
-    <div class="deco" style="bottom:-80px;left:-80px;width:240px;height:240px;background:rgba(0,196,179,0.12);border-radius:50%;filter:blur(30px);"></div>
-
-    <!-- 裝飾 -->
-    <svg class="deco anim-1" style="top:80px;left:8%;" data-parallax="0.4" width="32" height="32" viewBox="0 0 24 24" fill="#FFA300" opacity="0.6"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
-    <svg class="deco anim-spin" style="top:120px;right:10%;" data-parallax="0.3" width="28" height="28" viewBox="0 0 24 24" fill="#FFA300" opacity="0.5"><circle cx="12" cy="12" r="10"/></svg>
-    <svg class="deco anim-3" style="bottom:60px;left:14%;" data-parallax="0.5" width="40" height="40" viewBox="0 0 24 24" fill="#00C4B3" opacity="0.5"><path d="M12 2C12 2 6 8 6 14a6 6 0 0 0 12 0c0-6-6-12-6-12z"/></svg>
-
-    <div class="container">
-      <div class="text-center" data-aos="fade-up">
-        <span class="sec-eyebrow"><span class="sec-eyebrow-dot"></span>實作範例</span>
-        <h2 class="sec-heading">
-          <span class="sec-heading-en">VIDEO DEMO</span>
-          看見 AI 創作的<span class="accent-o">無限可能</span>
-        </h2>
-        <p class="sec-desc mx-auto">課程實作範例：透過 AI 讓靜態圖片動起來，<br>從一張圖到一段影片只需幾個提示詞。</p>
-      </div>
-      <a href="https://www.youtube.com/watch?v=irlNGTb-ypc" target="_blank" rel="noopener" class="video-frame video-link" data-aos="fade-up" data-aos-delay="100" aria-label="在 YouTube 觀看 AI 思維課程介紹">
-        <img src="https://img.youtube.com/vi/irlNGTb-ypc/maxresdefault.jpg"
-             alt="AI 思維課程介紹"
-             onerror="this.src='https://img.youtube.com/vi/irlNGTb-ypc/hqdefault.jpg';"
-             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:22px;">
-        <div class="video-play">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div class="video-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          在 YouTube 觀看完整課程介紹
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════ -->
   <!-- ══ Section 8.5：AI 思維 vs AI 實作營 ══ -->
   <!-- ══════════════════════════════════════ -->
   <section class="sec sec-vs-camp">
@@ -5354,7 +5611,7 @@
 
       <div class="faq-wrap">
 
-        <div class="faq-item open" data-aos="fade-up">
+        <div class="faq-item open">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q1</div>
             <div class="faq-q-text">AI 思維課是什麼？</div>
@@ -5365,7 +5622,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q2</div>
             <div class="faq-q-text">這堂課是 AI 繪圖課嗎？</div>
@@ -5376,7 +5633,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q3</div>
             <div class="faq-q-text">AI 思維課和 AI 實作營有什麼不同？</div>
@@ -5387,7 +5644,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q4</div>
             <div class="faq-q-text">沒有 AI 經驗可以上嗎？</div>
@@ -5398,7 +5655,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q5</div>
             <div class="faq-q-text">幾年級適合上這堂課？</div>
@@ -5409,7 +5666,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q6</div>
             <div class="faq-q-text">為什麼不能使用平板或平板加鍵盤？</div>
@@ -5420,7 +5677,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q7</div>
             <div class="faq-q-text">孩子會完成哪些作品？</div>
@@ -5431,7 +5688,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q8</div>
             <div class="faq-q-text">課程會不會太淺？</div>
@@ -5442,7 +5699,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q9</div>
             <div class="faq-q-text">課程會教 AI 倫理與著作權嗎？</div>
@@ -5453,7 +5710,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q10</div>
             <div class="faq-q-text">上課是老師示範，還是孩子自己操作？</div>
@@ -5464,7 +5721,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q11</div>
             <div class="faq-q-text">缺課可以補課嗎？</div>
@@ -5475,7 +5732,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q12</div>
             <div class="faq-q-text">這堂課對寫作、報告或學校學習有幫助嗎？</div>
@@ -5486,7 +5743,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item" data-aos="fade-up">
+        <div class="faq-item">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q13</div>
             <div class="faq-q-text">孩子不會寫程式，也能做遊戲和網頁嗎？</div>
@@ -5494,6 +5751,28 @@
           </div>
           <div class="faq-a"><div class="faq-a-inner">
             可以。課程會 <strong>透過 AI 輔助孩子理解遊戲規則、網頁排版與成果整合</strong>，不會要求孩子一開始就具備完整程式基礎。但孩子仍需要跟著老師逐步操作與修正。
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <div class="faq-q-icon">Q14</div>
+            <div class="faq-q-text">可以先試聽 AI 思維課嗎？</div>
+            <div class="faq-q-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            目前 AI 思維課採 <strong>15 堂完整課程設計</strong>，內容環環相扣，因此不開放單堂試聽。如想先體驗橘蘋的線上教學品質與師資風格，<strong>可預約 Minecraft、Python、Scratch 或 Roblox 等常態課程的免費試聽</strong>，再決定是否報名 AI 思維課。報名前也歡迎預約 1 對 1 課程介紹，由專人說明課程細節。
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <div class="faq-q-icon">Q15</div>
+            <div class="faq-q-text">課程退費規則？</div>
+            <div class="faq-q-toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            退費依 <strong>補習班相關法規</strong>計算（依出席堂數比例退還）。例如購買 15 堂課，出席未達第 6 堂前皆可申請退費；超過 1/3 後不再退款。詳細條件可在報名前由專人說明。
           </div></div>
         </div>
 
@@ -5515,14 +5794,15 @@
     <svg class="deco anim-wiggle" style="top:40%;right:30%;" data-parallax="0.5" width="80" height="14" viewBox="0 0 80 14" opacity="0.4"><path d="M2 7 Q 12 0, 22 7 T 42 7 T 62 7 T 80 7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
 
     <div class="container" data-aos="zoom-in">
-      <span class="footer-cta-eyebrow">名額有限｜寒假班不收 4 年級</span>
+      <span class="footer-cta-eyebrow">小班制 1:10｜額滿即停招</span>
       <span class="footer-cta-en">JOIN US NOW</span>
-      <h2>準備好開啟<br>AI 創作之旅了嗎？</h2>
-      <p>讓孩子在 AI 時代擁有不可取代的競爭力</p>
-      <a href="#" class="btn-footer">
-        立即報名
+      <h2>準備好讓孩子<br>跟 AI 一起完成任務了嗎？</h2>
+      <p>由橘蘋專人為孩子規劃合適的學習路徑</p>
+      <a href="https://orangeapple.co/free-trial" class="btn-footer" target="_blank" rel="noopener">
+        預約免費課程介紹
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
+      <p class="footer-cta-sub">想先體驗橘蘋的線上教學品質？<a href="https://orangeapple.co" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;font-weight:700;">預約 Minecraft、Python、Scratch 或 Roblox 等常態課程試聽 →</a></p>
     </div>
   </section>
 
@@ -5637,10 +5917,39 @@
     </div>
   </footer>
 
+  <!-- 手機底部 sticky CTA 條（< 768px 才顯示） -->
+  <div class="mobile-sticky-cta" id="mobile-sticky-cta" aria-hidden="true">
+    <a href="https://orangeapple.co/free-trial" target="_blank" rel="noopener" class="mobile-sticky-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span>預約 1 對 1 課程介紹</span>
+    </a>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, offset: 50, duration: 800 });
+
+    // 手機 sticky CTA：捲過 Hero 後才顯示，捲到 Footer CTA 區時隱藏
+    (function() {
+      const sticky = document.getElementById('mobile-sticky-cta');
+      const hero = document.querySelector('.hero');
+      const footerCta = document.getElementById('cta');
+      if (!sticky || !hero) return;
+      let ticking = false;
+      function update() {
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        const footerCtaTop = footerCta ? footerCta.getBoundingClientRect().top : Infinity;
+        const vh = window.innerHeight;
+        const shouldShow = heroBottom < 80 && footerCtaTop > vh - 60;
+        sticky.classList.toggle('visible', shouldShow);
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    })();
 
     // Hero Typewriter 動畫
     function initTypewriter() {
@@ -5666,7 +5975,7 @@
 
       cursor.classList.add('show');
       let tIdx = 0, cIdx = 0;
-      const charSpeed = 75;
+      const charSpeed = 32;
 
       function step() {
         if (tIdx >= tokens.length) return;
@@ -5684,10 +5993,10 @@
         }
         setTimeout(step, charSpeed);
       }
-      setTimeout(step, 1100);
+      setTimeout(step, 350);
     }
     if (document.querySelector('.hero-demo')) {
-      window.addEventListener('load', () => setTimeout(initTypewriter, 400));
+      window.addEventListener('load', () => setTimeout(initTypewriter, 200));
     }
 
     // Reasons Tabs 切換
