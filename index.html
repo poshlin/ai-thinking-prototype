@@ -3784,20 +3784,24 @@
       border-radius: 14px;
       padding: 18px 22px;
       display: grid;
-      grid-template-columns: 44px 1fr 28px;
+      grid-template-columns: 44px 1fr;   /* 移除箭頭欄，省下 28px */
       gap: 18px;
       align-items: center;
-      transition: all 0.25s;
-      cursor: default;
+      cursor: default;                    /* 不顯示為可點擊 */
     }
-    .lp-lesson:hover {
-      transform: translateX(6px);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.06);
+    /* 數字 + 左側橘色直條，視覺上更穩 */
+    .lp-lesson {
+      border-left: 3px solid rgba(255,163,0,0.35);
     }
+    .lp-panel.u2 .lp-lesson { border-left-color: rgba(255,88,89,0.35); }
+    .lp-panel.u3 .lp-lesson { border-left-color: rgba(0,196,179,0.35); }
+    .lp-panel.u4 .lp-lesson { border-left-color: rgba(232,146,10,0.45); }
     .lp-lesson-num {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: var(--orange);
+      font-family: 'SF Mono', 'Monaco', monospace;
+      letter-spacing: -0.5px;
     }
     .lp-panel.u2 .lp-lesson-num { color: var(--red); }
     .lp-panel.u3 .lp-lesson-num { color: var(--teal); }
@@ -3814,19 +3818,8 @@
       margin: 0;
       line-height: 1.5;
     }
-    .lp-lesson-arrow {
-      color: var(--gray);
-      opacity: 0.5;
-      transition: all 0.25s;
-    }
-    .lp-lesson:hover .lp-lesson-arrow {
-      opacity: 1;
-      color: var(--orange);
-      transform: translateX(3px);
-    }
-    .lp-panel.u2 .lp-lesson:hover .lp-lesson-arrow { color: var(--red); }
-    .lp-panel.u3 .lp-lesson:hover .lp-lesson-arrow { color: var(--teal); }
-    .lp-panel.u4 .lp-lesson:hover .lp-lesson-arrow { color: var(--orange-dark); }
+    /* 箭頭整段隱藏（不再給「點擊有事發生」的錯誤承諾） */
+    .lp-lesson-arrow { display: none; }
 
     /* ══════════════════════════════════════
        Section 7：15 個驚人成就（網格）
@@ -3949,7 +3942,7 @@
         min-width: 0;
       }
       .lp-panel-num { font-size: 3rem; }
-      .lp-lesson { padding: 14px 18px; grid-template-columns: 36px 1fr 22px; gap: 14px; }
+      .lp-lesson { padding: 14px 18px; grid-template-columns: 36px 1fr; gap: 14px; }
       .lp-dots {
         display: flex;
         justify-content: center;
