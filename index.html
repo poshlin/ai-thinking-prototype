@@ -2468,6 +2468,28 @@
       flex-shrink: 0;
     }
 
+    .vs-dots { display: none; }
+    .compare-dots { display: none; }
+    @media (max-width: 768px) {
+      .vs-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .vs-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transition: all 0.25s;
+      }
+      .vs-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
+      }
+    }
+
     .vs-summary {
       max-width: 880px;
       margin: 56px auto 0;
@@ -2489,7 +2511,9 @@
       border-radius: 6px;
       font-weight: 800;
       display: inline-block;
-      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .vs-summary strong { display: inline; padding: 1px 6px; }
     }
 
     @media (max-width: 768px) {
@@ -4322,8 +4346,21 @@
       .phase-step { position: relative; }
       .phase-2 .phase-step:not(:last-child)::after { color: var(--teal); }
 
-      /* 對照表（vs 表面）- 手機改單卡內部上下排，避免黑橘黑橘循環 */
+      /* 對照表（vs 表面）- 手機改橫向 swipe carousel，每張卡 = 一組完整對比 */
+      .vs-table {
+        display: flex;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 32px -20px 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .vs-table::-webkit-scrollbar { display: none; }
       .vs-row {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
         grid-template-columns: 1fr;
         gap: 0;
         background: rgba(255,255,255,0.04);
@@ -4331,6 +4368,7 @@
         overflow: hidden;
         border: 1.5px solid rgba(255,255,255,0.12);
         position: relative;
+        min-width: 0;
       }
       /* vs-cell 改 block layout（不再用 flex + absolute label） */
       .vs-cell {
@@ -4404,77 +4442,110 @@
       }
       .vs-summary { font-size: 1.05rem; line-height: 1.85; padding: 28px 22px; border-radius: 20px; }
 
-      /* Compare table（vs 實作營）─ 手機改卡片內 3 段對照 */
+      /* Compare table（vs 實作營）─ 手機改橫向 carousel，每張卡 = 一個比較項目 + 兩課程並排 */
       .compare-table {
         background: transparent;
         box-shadow: none;
         border: none;
         display: flex;
-        flex-direction: column;
-        gap: 16px;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 6px 20px 16px;
+        margin: 56px -20px 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
         border-radius: 0;
-        overflow: visible;
       }
+      .compare-table::-webkit-scrollbar { display: none; }
       .compare-row {
-        grid-template-columns: 1fr !important;
+        flex: 0 0 88%;
+        scroll-snap-align: center;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto 1fr;
         background: #fff;
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         border: 1px solid #f0f0f0;
+        min-width: 0;
       }
       .compare-row + .compare-row { border-top: 1px solid #f0f0f0 !important; }
       .compare-row.head {
-        display: none;  /* 手機隱藏 header 列，每個 row 內已有「比較項目」當小標題 */
+        display: none !important;  /* 手機隱藏 header 列，每個 row 已有「比較項目」當小標題 */
       }
       .compare-cell {
-        padding: 14px 18px !important;
+        padding: 14px 14px !important;
         border-right: none !important;
-        font-size: 0.96rem !important;
-        line-height: 1.55;
+        font-size: 0.92rem !important;
+        line-height: 1.5;
         position: relative;
       }
-      /* 第一欄：比較項目（黑底白字小標） */
+      /* 比較項目：上方橫向 header（橘色背景） */
       .compare-cell.item {
-        background: var(--text) !important;
+        grid-column: 1 / -1;
+        background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 100%) !important;
         color: #fff !important;
         font-weight: 700;
-        font-size: 0.86rem !important;
-        letter-spacing: 1px;
+        font-size: 0.78rem !important;
+        letter-spacing: 1.5px;
         text-align: center;
-        padding: 10px 18px !important;
+        padding: 8px 14px !important;
       }
-      /* 第二欄：AI 實作營（左，淡灰） */
+      .compare-cell.item::before { content: '比較項目  ·  '; opacity: 0.7; }
+      /* 左半：AI 實作營（淡灰） */
       .compare-cell.left {
         background: #fafafa;
         color: var(--gray);
-        padding-top: 32px !important;
+        padding-top: 30px !important;
+        border-right: 1px solid #f0f0f0 !important;
       }
       .compare-cell.left::before {
         content: 'AI 實作營';
         position: absolute;
-        top: 10px; left: 18px;
-        font-size: 0.7rem;
+        top: 8px; left: 14px;
+        font-size: 0.66rem;
         font-weight: 700;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         color: var(--gray);
         opacity: 0.7;
       }
-      /* 第三欄：AI 思維課（右，橘色推薦） */
+      /* 右半：AI 思維課（橘色） */
       .compare-cell.right {
         background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%);
         color: var(--text);
         font-weight: 700;
-        padding-top: 32px !important;
+        padding-top: 30px !important;
       }
       .compare-cell.right::before {
         content: '★ AI 思維課';
         position: absolute;
-        top: 10px; left: 18px;
-        font-size: 0.7rem;
+        top: 8px; left: 14px;
+        font-size: 0.66rem;
         font-weight: 700;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         color: var(--orange-dark);
+      }
+
+      /* compare-dots 指示器 */
+      .compare-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .compare-dots .dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: rgba(255,163,0,0.32);
+        transition: all 0.25s;
+      }
+      .compare-dots .dot.active {
+        background: var(--orange);
+        width: 22px;
+        border-radius: 4px;
       }
 
       /* Suitable */
@@ -5559,6 +5630,7 @@
         </div>
 
       </div>
+      <div class="vs-dots" aria-hidden="true"></div>
 
       <div class="vs-summary" data-aos="fade-up" data-aos-delay="420">
         真正的學習目標，不是孩子能不能<strong>按出漂亮圖片</strong>，<br>
@@ -5890,6 +5962,7 @@
           <div class="compare-cell right">累積角色、故事、影像、遊戲、網頁等完整專案成果</div>
         </div>
       </div>
+      <div class="compare-dots" aria-hidden="true"></div>
 
       <div class="compare-summary" data-aos="fade-up" data-aos-delay="200">
         <div class="compare-summary-line">
@@ -6413,6 +6486,8 @@
       initCarousel('.phase-wrap', '.phase-dots', '.phase-block');
       initCarousel('.ach-grid', '.ach-dots', '.ach-card');
       initCarousel('.suitable-grid', '.suitable-dots', '.suitable-col');
+      initCarousel('.vs-table', '.vs-dots', '.vs-row');
+      initCarousel('.compare-table', '.compare-dots', '.compare-row:not(.head)');
     })();
 
     // Info-table 分組 Tabs（手機分類切換）
