@@ -3945,9 +3945,64 @@
     ══════════════════════════════════════ */
     .sec-faq { background: var(--bg-light); position: relative; }
 
+    /* 桌面：faq-chips 不顯示（桌面看完整列表） */
+    .faq-chips { display: none; }
+
     .faq-wrap {
       max-width: 880px;
       margin: 56px auto 0;
+    }
+
+    @media (max-width: 768px) {
+      /* 手機分類 chips */
+      .faq-chips {
+        display: flex;
+        gap: 8px;
+        max-width: 880px;
+        margin: 32px auto 0;
+        padding: 4px 20px 12px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .faq-chips::-webkit-scrollbar { display: none; }
+      .faq-chip {
+        flex: 0 0 auto;
+        background: #fff;
+        border: 1.5px solid rgba(0,196,179,0.25);
+        border-radius: 999px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.25s;
+        white-space: nowrap;
+      }
+      .faq-chip:hover { border-color: var(--teal); }
+      .faq-chip.active {
+        background: linear-gradient(135deg, #E0F8F5 0%, #C0F0EA 100%);
+        border-color: var(--teal);
+        border-width: 2px;
+        box-shadow: 0 6px 16px rgba(0,196,179,0.22);
+      }
+      .faq-chip-icon { font-size: 0.95rem; line-height: 1; }
+      .faq-chip-text {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.3px;
+      }
+      .faq-chip.active .faq-chip-text { color: #008678; }
+
+      .faq-wrap { margin-top: 16px; }
+      /* 過濾邏輯：active != all 時，只顯示對應 cat 的 item */
+      .faq-wrap[data-active="content"] .faq-item:not([data-cat="content"]),
+      .faq-wrap[data-active="signup"] .faq-item:not([data-cat="signup"]),
+      .faq-wrap[data-active="outcome"] .faq-item:not([data-cat="outcome"]) {
+        display: none;
+      }
     }
     .faq-item {
       background: #fff;
@@ -6055,9 +6110,29 @@
         </h2>
       </div>
 
-      <div class="faq-wrap">
+      <!-- 手機分類 chips（桌面隱藏） -->
+      <div class="faq-chips" role="tablist" aria-label="FAQ 分類">
+        <button class="faq-chip active" data-cat="all" role="tab" aria-selected="true">
+          <span class="faq-chip-icon">📖</span>
+          <span class="faq-chip-text">全部</span>
+        </button>
+        <button class="faq-chip" data-cat="content" role="tab" aria-selected="false">
+          <span class="faq-chip-icon">📚</span>
+          <span class="faq-chip-text">課程內容</span>
+        </button>
+        <button class="faq-chip" data-cat="signup" role="tab" aria-selected="false">
+          <span class="faq-chip-icon">📋</span>
+          <span class="faq-chip-text">報名實務</span>
+        </button>
+        <button class="faq-chip" data-cat="outcome" role="tab" aria-selected="false">
+          <span class="faq-chip-icon">🎯</span>
+          <span class="faq-chip-text">學習效果</span>
+        </button>
+      </div>
 
-        <div class="faq-item open">
+      <div class="faq-wrap" data-active="all">
+
+        <div class="faq-item open" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q1</div>
             <div class="faq-q-text">AI 思維課是什麼？</div>
@@ -6068,7 +6143,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q2</div>
             <div class="faq-q-text">這堂課是 AI 繪圖課嗎？</div>
@@ -6079,7 +6154,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q3</div>
             <div class="faq-q-text">AI 思維課和 AI 實作營有什麼不同？</div>
@@ -6090,7 +6165,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q4</div>
             <div class="faq-q-text">沒有 AI 經驗可以上嗎？</div>
@@ -6101,7 +6176,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q5</div>
             <div class="faq-q-text">幾年級適合上這堂課？</div>
@@ -6112,7 +6187,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q6</div>
             <div class="faq-q-text">為什麼不能使用平板或平板加鍵盤？</div>
@@ -6123,7 +6198,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="outcome">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q7</div>
             <div class="faq-q-text">孩子會完成哪些作品？</div>
@@ -6134,7 +6209,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="outcome">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q8</div>
             <div class="faq-q-text">課程會不會太淺？</div>
@@ -6145,7 +6220,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q9</div>
             <div class="faq-q-text">課程會教 AI 倫理與著作權嗎？</div>
@@ -6156,7 +6231,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="content">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q10</div>
             <div class="faq-q-text">上課是老師示範，還是孩子自己操作？</div>
@@ -6167,7 +6242,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q11</div>
             <div class="faq-q-text">缺課可以補課嗎？</div>
@@ -6178,7 +6253,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="outcome">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q12</div>
             <div class="faq-q-text">這堂課對寫作、報告或學校學習有幫助嗎？</div>
@@ -6189,7 +6264,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="outcome">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q13</div>
             <div class="faq-q-text">孩子不會寫程式，也能做遊戲和網頁嗎？</div>
@@ -6200,7 +6275,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q14</div>
             <div class="faq-q-text">可以先試聽 AI 思維課嗎？</div>
@@ -6211,7 +6286,7 @@
           </div></div>
         </div>
 
-        <div class="faq-item">
+        <div class="faq-item" data-cat="signup">
           <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
             <div class="faq-q-icon">Q15</div>
             <div class="faq-q-text">課程退費規則？</div>
@@ -6488,6 +6563,25 @@
       initCarousel('.suitable-grid', '.suitable-dots', '.suitable-col');
       initCarousel('.vs-table', '.vs-dots', '.vs-row');
       initCarousel('.compare-table', '.compare-dots', '.compare-row:not(.head)');
+    })();
+
+    // FAQ 分類 Chips（手機分類過濾）
+    (function() {
+      const wrap = document.querySelector('.faq-wrap');
+      const chips = document.querySelectorAll('.faq-chip');
+      if (!wrap || !chips.length) return;
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const cat = chip.dataset.cat;
+          wrap.setAttribute('data-active', cat);
+          chips.forEach(c => {
+            c.classList.remove('active');
+            c.setAttribute('aria-selected', 'false');
+          });
+          chip.classList.add('active');
+          chip.setAttribute('aria-selected', 'true');
+        });
+      });
     })();
 
     // Info-table 分組 Tabs（手機分類切換）
