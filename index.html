@@ -1659,19 +1659,6 @@
         letter-spacing: 0.3px;
       }
       .info-tab.active .info-tab-text { color: var(--orange-dark); }
-      .info-tab-count {
-        position: absolute;
-        top: 4px; right: 6px;
-        background: rgba(255,163,0,0.18);
-        color: var(--orange-dark);
-        font-size: 0.62rem;
-        font-weight: 700;
-        padding: 1px 6px;
-        border-radius: 999px;
-        min-width: 18px;
-        text-align: center;
-      }
-      .info-tab.active .info-tab-count { background: var(--orange); color: #fff; }
 
       /* 手機：只顯示符合 active tab 的 row + warn row（恆顯）*/
       .info-row[data-cat] { display: none; }
@@ -4868,17 +4855,14 @@
           <button class="info-tab active" data-cat="basic" role="tab" aria-selected="true">
             <span class="info-tab-icon">📋</span>
             <span class="info-tab-text">基本資訊</span>
-            <span class="info-tab-count">4</span>
           </button>
           <button class="info-tab" data-cat="teaching" role="tab" aria-selected="false">
             <span class="info-tab-icon">🎯</span>
             <span class="info-tab-text">教學品質</span>
-            <span class="info-tab-count">3</span>
           </button>
           <button class="info-tab" data-cat="output" role="tab" aria-selected="false">
             <span class="info-tab-icon">🎨</span>
             <span class="info-tab-text">學習與服務</span>
-            <span class="info-tab-count">2</span>
           </button>
         </div>
 
