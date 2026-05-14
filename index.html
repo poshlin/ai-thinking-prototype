@@ -1578,7 +1578,8 @@
       align-items: start;
     }
     .info-row:last-child { border-bottom: none; }
-    .info-row:nth-child(odd) { background: #fffbf5; }
+    /* 條紋：因 info-tabs 為第 1 子元素（手機才顯示），用 even 才能讓第 1 個 row 變條紋 */
+    .info-row:nth-child(even) { background: #fffbf5; }
     .info-label {
       display: flex;
       align-items: center;
@@ -1613,9 +1614,97 @@
       padding: 2px 8px;
       border-radius: 4px;
     }
+    /* 桌面：info-tabs 不顯示（桌面看全表） */
+    .info-tabs { display: none; }
+
     @media (max-width: 768px) {
       .info-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 20px; }
       .info-value { padding-top: 0; }
+
+      /* 手機分組 Tabs */
+      .info-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+        padding: 12px 12px 4px;
+        background: linear-gradient(180deg, #fffbf5 0%, #fff 100%);
+        border-bottom: 1.5px dashed #f0e6d6;
+      }
+      .info-tab {
+        background: #fff;
+        border: 1.5px solid rgba(255,163,0,0.18);
+        border-radius: 12px;
+        padding: 10px 6px 8px;
+        cursor: pointer;
+        font-family: inherit;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        transition: all 0.25s;
+        position: relative;
+      }
+      .info-tab:hover { border-color: var(--orange); }
+      .info-tab.active {
+        background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%);
+        border-color: var(--orange);
+        border-width: 2px;
+        box-shadow: 0 6px 16px rgba(255,163,0,0.22);
+      }
+      .info-tab-icon { font-size: 1.05rem; line-height: 1; }
+      .info-tab-text {
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: 0.3px;
+      }
+      .info-tab.active .info-tab-text { color: var(--orange-dark); }
+      .info-tab-count {
+        position: absolute;
+        top: 4px; right: 6px;
+        background: rgba(255,163,0,0.18);
+        color: var(--orange-dark);
+        font-size: 0.62rem;
+        font-weight: 700;
+        padding: 1px 6px;
+        border-radius: 999px;
+        min-width: 18px;
+        text-align: center;
+      }
+      .info-tab.active .info-tab-count { background: var(--orange); color: #fff; }
+
+      /* 手機：只顯示符合 active tab 的 row + warn row（恆顯）*/
+      .info-row[data-cat] { display: none; }
+      .info-row[data-cat="warn"] { display: grid; }
+      .info-table[data-active="basic"] .info-row[data-cat="basic"],
+      .info-table[data-active="teaching"] .info-row[data-cat="teaching"],
+      .info-table[data-active="output"] .info-row[data-cat="output"] {
+        display: grid;
+        animation: infoRowIn 0.32s ease;
+      }
+      @keyframes infoRowIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* warn row 在手機上加分隔線 + 強化視覺，告訴使用者「這條永遠存在」 */
+      .info-row.warn {
+        border-top: 2px solid rgba(255,88,89,0.25);
+        position: relative;
+      }
+      .info-row.warn::before {
+        content: '⚠ 重要';
+        position: absolute;
+        top: -10px; left: 50%;
+        transform: translateX(-50%);
+        background: var(--red);
+        color: #fff;
+        font-size: 0.66rem;
+        font-weight: 800;
+        padding: 2px 12px;
+        border-radius: 999px;
+        letter-spacing: 1px;
+      }
     }
 
     /* ══════════════════════════════════════
@@ -4654,9 +4743,29 @@
         </p>
       </div>
 
-      <!-- 課程資訊表（8 項） -->
+      <!-- 課程資訊表（10 項，手機分 3 tab + 設備需求恆顯） -->
       <div class="info-table" data-aos="fade-up" data-aos-delay="160" id="ai-course-info">
-        <div class="info-row">
+
+        <!-- 手機專用分類 Tabs（桌面隱藏） -->
+        <div class="info-tabs" role="tablist">
+          <button class="info-tab active" data-cat="basic" role="tab" aria-selected="true">
+            <span class="info-tab-icon">📋</span>
+            <span class="info-tab-text">基本資訊</span>
+            <span class="info-tab-count">4</span>
+          </button>
+          <button class="info-tab" data-cat="teaching" role="tab" aria-selected="false">
+            <span class="info-tab-icon">🎯</span>
+            <span class="info-tab-text">教學品質</span>
+            <span class="info-tab-count">3</span>
+          </button>
+          <button class="info-tab" data-cat="output" role="tab" aria-selected="false">
+            <span class="info-tab-icon">🎨</span>
+            <span class="info-tab-text">學習與服務</span>
+            <span class="info-tab-count">2</span>
+          </button>
+        </div>
+
+        <div class="info-row" data-cat="basic">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
@@ -4666,7 +4775,7 @@
           <div class="info-value"><strong>AI 思維：實戰問題解決課</strong></div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="basic">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -4676,7 +4785,7 @@
           <div class="info-value">線上課程（直播互動＋實作任務）</div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="basic">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -4686,7 +4795,7 @@
           <div class="info-value">5 年級以上學生，<strong>零基礎可學</strong></div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="basic">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -4696,7 +4805,7 @@
           <div class="info-value">每堂 2 小時，共 <strong>15 堂</strong>，總計 <strong>30 小時</strong></div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="teaching">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
@@ -4706,7 +4815,7 @@
           <div class="info-value">講述引導　＋　AI 實作任務（孩子自己操作、判斷、修正）</div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="teaching">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -4716,7 +4825,7 @@
           <div class="info-value">小班制 <strong>1 : 10</strong>（每位老師最多帶 10 位學生）</div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="teaching">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 0 1 .665 6.479A11.952 11.952 0 0 0 12 20.055a11.952 11.952 0 0 0-6.824-2.998 12.078 12.078 0 0 1 .665-6.479L12 14z"/></svg>
@@ -4726,7 +4835,7 @@
           <div class="info-value"><strong>固定老師制</strong>（整學期由同一位老師授課，臨時狀況另行安排代課），所有老師皆通過教學部評核</div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="output">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
@@ -4736,7 +4845,7 @@
           <div class="info-value">角色三視圖、貼圖、3D 玩具圖、創意明信片、聯名包裝、名畫風格、AI 繪本、AI 影片、電影海報、戰鬥卡牌、簡易遊戲、Logo、簽名、簡易網頁、<strong>個人作品集網頁</strong></div>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" data-cat="output">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -4746,7 +4855,8 @@
           <div class="info-value">課程提供 <strong>補課影片</strong>，可用於缺課補課與課後複習</div>
         </div>
 
-        <div class="info-row warn">
+        <!-- 設備需求：手機上恆顯（不在 tab 內，獨立警示） -->
+        <div class="info-row warn" data-cat="warn">
           <div class="info-label">
             <span class="info-label-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -6039,6 +6149,26 @@
     if (document.querySelector('.hero-demo')) {
       window.addEventListener('load', () => setTimeout(initTypewriter, 200));
     }
+
+    // Info-table 分組 Tabs（手機分類切換）
+    (function() {
+      const table = document.getElementById('ai-course-info');
+      if (!table) return;
+      // 初始化：設為 basic
+      table.setAttribute('data-active', 'basic');
+      table.querySelectorAll('.info-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const cat = tab.dataset.cat;
+          table.setAttribute('data-active', cat);
+          table.querySelectorAll('.info-tab').forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+        });
+      });
+    })();
 
     // Reasons Tabs 切換（共用函式）
     function activateReasonTab(btn, scrollIntoView) {
