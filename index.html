@@ -3256,19 +3256,29 @@
       font-family: inherit;
       position: relative;
     }
+    /* 未選中：每個 tab 有自己的淡色身分（讓使用者一眼看出對應系列） */
+    .lp-tab[data-color="o"] { background: #FFF8EF; border-color: rgba(255,163,0,0.32); }
+    .lp-tab[data-color="r"] { background: #FFF1F1; border-color: rgba(255,88,89,0.32); }
+    .lp-tab[data-color="t"] { background: #ECFAF8; border-color: rgba(0,196,179,0.32); }
+    .lp-tab[data-color="d"] { background: #FFF3E0; border-color: rgba(232,146,10,0.36); }
     .lp-tab:hover {
-      border-color: rgba(255,163,0,0.4);
       transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.05);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
     }
+    .lp-tab[data-color="o"]:hover { border-color: var(--orange); }
+    .lp-tab[data-color="r"]:hover { border-color: var(--red); }
+    .lp-tab[data-color="t"]:hover { border-color: var(--teal); }
+    .lp-tab[data-color="d"]:hover { border-color: var(--orange-dark); }
+    /* 選中：背景跟 panel 第一個漸層色完全一致，視覺連動 */
     .lp-tab.active {
-      border-width: 2.5px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-width: 3px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      transform: translateY(-3px);
     }
-    .lp-tab[data-color="o"].active { border-color: var(--orange); background: linear-gradient(180deg, #fff 0%, #FFF8EF 100%); }
-    .lp-tab[data-color="r"].active { border-color: var(--red); background: linear-gradient(180deg, #fff 0%, #FFF5F5 100%); }
-    .lp-tab[data-color="t"].active { border-color: var(--teal); background: linear-gradient(180deg, #fff 0%, #F0FCFA 100%); }
-    .lp-tab[data-color="d"].active { border-color: var(--orange-dark); background: linear-gradient(180deg, #fff 0%, #FFF3E0 100%); }
+    .lp-tab[data-color="o"].active { border-color: var(--orange); background: linear-gradient(135deg, #FFF3E0 0%, #FFE5C2 100%); }
+    .lp-tab[data-color="r"].active { border-color: var(--red); background: linear-gradient(135deg, #FFE5E5 0%, #FFCFCF 100%); }
+    .lp-tab[data-color="t"].active { border-color: var(--teal); background: linear-gradient(135deg, #E0F8F5 0%, #C0F0EA 100%); }
+    .lp-tab[data-color="d"].active { border-color: var(--orange-dark); background: linear-gradient(135deg, #FFE0BD 0%, #FFD0A0 100%); }
 
     .lp-tab-head {
       display: flex;
@@ -6055,26 +6065,53 @@
       window.addEventListener('load', updateState);
     })();
 
-    // Learning Path Tabs 切換
-    document.querySelectorAll('.lp-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = tab.dataset.target;
-        // 切換 tab active 狀態
-        document.querySelectorAll('.lp-tab').forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        // 切換 panel
-        document.querySelectorAll('.lp-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
-        // 手機橫向滑動時自動置中
-        if (window.innerWidth < 768) {
-          tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
+    // Learning Path Tabs 切換（共用函式）
+    function activateLpTab(tab, scrollIntoView) {
+      if (!tab || tab.classList.contains('active')) return;
+      const target = tab.dataset.target;
+      document.querySelectorAll('.lp-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
       });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.lp-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById(target);
+      if (panel) panel.classList.add('active');
+      if (scrollIntoView && window.innerWidth < 768) {
+        tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+    document.querySelectorAll('.lp-tab').forEach(tab => {
+      tab.addEventListener('click', () => activateLpTab(tab, true));
     });
+
+    // 手機橫向滑動 → 自動切換 panel（< 768px 才生效）
+    (function() {
+      const tabsWrap = document.querySelector('.lp-tabs');
+      if (!tabsWrap) return;
+      let scrollTimer = null;
+      tabsWrap.addEventListener('scroll', () => {
+        if (window.innerWidth >= 768) return;
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          // 找出最靠近 viewport 中央的 tab
+          const wrapRect = tabsWrap.getBoundingClientRect();
+          const wrapCenter = wrapRect.left + wrapRect.width / 2;
+          let closestTab = null;
+          let minDist = Infinity;
+          tabsWrap.querySelectorAll('.lp-tab').forEach(tab => {
+            const tabRect = tab.getBoundingClientRect();
+            const tabCenter = tabRect.left + tabRect.width / 2;
+            const dist = Math.abs(tabCenter - wrapCenter);
+            if (dist < minDist) { minDist = dist; closestTab = tab; }
+          });
+          if (closestTab && !closestTab.classList.contains('active')) {
+            activateLpTab(closestTab, false);  // 不要 scrollIntoView，避免無窮回饋
+          }
+        }, 90);  // scroll-end debounce
+      }, { passive: true });
+    })();
 
     // mobile 漢堡選單開關
     const burger = document.getElementById('navBurger');
