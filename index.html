@@ -6675,14 +6675,23 @@
 
       dots.forEach((dot, i) => {
         dot.addEventListener('click', () => {
-          carousel.scrollTo({ left: cardStep() * i, behavior: 'smooth' });
+          // 點 dot i = 讓 card i 成為最右邊看到的卡片（與 updateState 對齊）
+          const step = cardStep();
+          const visibleCount = Math.max(1, Math.round(carousel.clientWidth / step));
+          const targetLeftmost = Math.max(0, i - visibleCount + 1);
+          carousel.scrollTo({ left: targetLeftmost * step, behavior: 'smooth' });
         });
       });
 
       let scrollTimer;
       const updateState = () => {
-        const idx = Math.round(carousel.scrollLeft / cardStep());
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        // active dot = 最右邊看到的卡片
+        //（桌面同時顯 3 張時起點是 dot 3、滑一次變 dot 4、終點 dot 5）
+        const step = cardStep();
+        const leftmostIdx = Math.round(carousel.scrollLeft / step);
+        const visibleCount = Math.max(1, Math.round(carousel.clientWidth / step));
+        const rightmostIdx = Math.min(leftmostIdx + visibleCount - 1, dots.length - 1);
+        dots.forEach((d, i) => d.classList.toggle('active', i === rightmostIdx));
         if (prevBtn) prevBtn.classList.toggle('disabled', carousel.scrollLeft <= 4);
         if (nextBtn) nextBtn.classList.toggle('disabled',
           carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 4);
