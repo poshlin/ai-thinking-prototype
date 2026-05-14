@@ -1612,7 +1612,7 @@
       gap: 24px;
       padding: 22px 32px;
       border-bottom: 1px dashed #f0e6d6;
-      align-items: start;
+      align-items: center;  /* 左右欄垂直置中對齊（單行時剛好齊平、多行時 label 居中） */
     }
     .info-row:last-child { border-bottom: none; }
     /* 條紋：因 info-tabs 為第 1 子元素（手機才顯示），用 even 才能讓第 1 個 row 變條紋 */
@@ -1639,7 +1639,7 @@
       font-size: 1.05rem;
       color: var(--text);
       line-height: 1.7;
-      padding-top: 10px;
+      padding-top: 0;     /* 取消頂部 padding，配合 row 的 align-items:center 對齊 */
     }
     .info-value strong { color: var(--orange-dark); font-weight: 700; }
     .info-row.warn { background: var(--red-pale); }
@@ -2551,7 +2551,8 @@
       display: inline-block;
     }
     @media (max-width: 768px) {
-      .vs-summary strong { display: inline; padding: 1px 6px; }
+      /* 維持 inline-block：strong 整段不被切斷，避免「圖片」掉到下一行單獨出現 */
+      .vs-summary strong { padding: 1px 6px; }
     }
 
     @media (max-width: 768px) {
@@ -3924,6 +3925,7 @@
       .lp-panels {
         display: flex !important;
         flex-direction: row;
+        align-items: stretch;          /* panel 同高，視覺一致 */
         overflow-x: auto;
         gap: 14px;
         padding: 6px 20px 16px;
@@ -3942,6 +3944,8 @@
         gap: 22px;
         border-radius: 22px;
         grid-template-columns: 1fr;
+        grid-auto-rows: min-content;    /* 內容只占自然高度 */
+        align-content: start;            /* 多餘空間留在 panel 底部，內容靠上 */
         min-width: 0;
       }
       .lp-panel-num { font-size: 3rem; }
@@ -5922,7 +5926,7 @@
 
       <div class="vs-summary" data-aos="fade-up" data-aos-delay="420">
         真正的學習目標，不是孩子能不能<strong>按出漂亮圖片</strong>，<br>
-        而是孩子能不能用 AI 幫助自己<strong>完成一個從想法到成果的完整任務</strong>。
+        而是能不能用 AI <strong>完成從想法到成果的任務</strong>。
       </div>
     </div>
   </section>
@@ -5943,7 +5947,7 @@
           <span class="sec-heading-en">TEACHING FLOW</span>
           孩子不是坐著聽，<br>而是<span class="accent-o">一直練習表達</span>
         </h2>
-        <p class="sec-desc mx-auto">這堂課的設計重點，是讓孩子在每一堂課都反覆練習<br><strong style="color:var(--text);">「觀察、描述、生成、比較、修正」</strong>。孩子不是看老師示範，而是自己操作、自己判斷、自己調整。</p>
+        <p class="sec-desc mx-auto">這堂課的設計重點，是讓孩子在每一堂課都反覆練習 <strong style="color:var(--text);">「觀察、描述、生成、比較、修正」</strong>。孩子不是看老師示範，而是自己操作、自己判斷、自己調整。</p>
       </div>
 
       <div class="phase-wrap">
